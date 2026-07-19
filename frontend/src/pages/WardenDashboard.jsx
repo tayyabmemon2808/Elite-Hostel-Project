@@ -44,45 +44,59 @@ const handleResolve = async (id) => {
   }
 };
 if (loading) return <Loader text="Please wait..." />;
+
   return (
-    <div className='container'>
-     <Navbar title="Warden Dashboard" />
-     {success && (
-  <div className="loader-overlay">
-    <div className="success-box">
-      <p>✅ {success}</p>
-    </div>
-  </div>
-)}
-      <p>Welcome, {user.name}! (Block: {user.block})</p>
+    <div className="container">
+      <Navbar title="Warden Dashboard" />
 
-      <h3>Rooms in {user.block}</h3>
-{rooms.length === 0 && <p>No rooms in your block.</p>}
-<ul>
-  {rooms.map((r) => (
-    <li key={r._id}>
-      {r.roomNumber} — Capacity: {r.capacity} — Status: {r.status} <br />
-      Students: {r.studentsAllotted.length > 0
-        ? r.studentsAllotted.map(s => s.name).join(', ')
-        : 'None'}
-    </li>
-  ))}
-</ul>
+      {success && (
+        <div className="loader-overlay">
+          <div className="success-box">
+            <p>✅ {success}</p>
+          </div>
+        </div>
+      )}
 
-      <h3>Complaints in {user.block}</h3>
-      {complaints.length === 0 && <p>No complaints in your block.</p>}
-      <ul>
-        {complaints.map((c) => (
-          <li key={c._id}>
-            <strong>{c.title}</strong> — {c.status} <br />
-            By: {c.student.name} ({c.student.email}) <br />
-            {c.description} <br />
-            {c.status === 'pending' && (
-              <button onClick={() => handleResolve(c._id)}>Mark as Resolved</button>
-            )}
-          </li>
-        ))}
-      </ul>
+      <p className="welcome-text">Welcome, {user.name} — managing {user.block}</p>
+
+      <div className="section-card">
+        <h3>Rooms in {user.block}</h3>
+        {rooms.length === 0 && <p>No rooms in your block.</p>}
+        <ul className="card-grid">
+          {rooms.map((r) => (
+            <li key={r._id}>
+              <strong>{r.roomNumber}</strong>
+              <span className={`badge badge-${r.status}`}>{r.status}</span>
+              <br />
+              Capacity: {r.capacity} <br />
+              Students: {r.studentsAllotted.length > 0
+                ? r.studentsAllotted.map(s => s.name).join(', ')
+                : 'None'}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="section-card">
+        <h3>Complaints in {user.block}</h3>
+        {complaints.length === 0 && <p>No complaints in your block.</p>}
+        <ul className="card-grid">
+          {complaints.map((c) => (
+            <li key={c._id}>
+              <strong>{c.title}</strong>
+              <span className={`badge badge-${c.status}`}>{c.status}</span>
+              <br />
+              By: {c.student.name} ({c.student.email}) <br />
+              {c.description}
+              {c.status === 'pending' && (
+                <div className="card-actions">
+                  <button onClick={() => handleResolve(c._id)}>Mark as Resolved</button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

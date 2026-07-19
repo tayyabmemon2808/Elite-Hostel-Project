@@ -68,63 +68,72 @@ const [success, setSuccess] = useState('');
     setLoading(false);
   }
 };
-  if (loading) return <Loader text="Please wait..." />;
+ if (loading) return <Loader text="Please wait..." />;
+
   return (
     <div className='container'>
-     <Navbar title="Student Dashboard" />
-     {success && (
-  <div className="loader-overlay">
-    <div className="success-box">
-      <p>✅ {success}</p>
-    </div>
-  </div>
-)}
-      <p>Welcome, {user.name}! (Block: {user.block})</p>
+      <Navbar title="Student Dashboard" />
 
-      <h3>My Room</h3>
-{myRoom ? (
-  <div className="room-info">
-    <p><strong>Room:</strong> {myRoom.roomNumber}</p>
-    <p><strong>Roommates:</strong> {
-      myRoom.studentsAllotted
-        .filter(s => s._id !== user.id)
-        .map(s => s.name)
-        .join(', ') || 'None yet'
-    }</p>
-  </div>
-) : (
-  <p>You have not been allotted a room yet.</p>
-)}
+      {success && (
+        <div className="loader-overlay">
+          <div className="success-box">
+            <p>✅ {success}</p>
+          </div>
+        </div>
+      )}
 
-      <h3>File a Complaint</h3>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Complaint Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
-        <textarea
-          placeholder="Describe your complaint"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <br />
-        <button type="submit">Submit Complaint</button>
-      </form>
+      <p className="welcome-text">Welcome, {user.name} — {user.block}</p>
 
-      <h3>My Complaints</h3>
-      {complaints.length === 0 && <p>No complaints filed yet.</p>}
-      <ul>
-        {complaints.map((c) => (
-          <li key={c._id}>
-            <strong>{c.title}</strong> — {c.status} <br />
-            {c.description}
-          </li>
-        ))}
-      </ul>
+      <div className="section-card">
+        <h3>My Room</h3>
+        {myRoom ? (
+          <div className="room-info">
+            <p><strong>Room:</strong> {myRoom.roomNumber}</p>
+            <p><strong>Roommates:</strong> {
+              myRoom.studentsAllotted
+                .filter(s => s._id !== user.id)
+                .map(s => s.name)
+                .join(', ') || 'None yet'
+            }</p>
+          </div>
+        ) : (
+          <p>You have not been allotted a room yet.</p>
+        )}
+      </div>
+
+      <div className="section-card">
+        <h3>File a Complaint</h3>
+        {message && <p className="error-text">{message}</p>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Complaint Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+            placeholder="Describe your complaint"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button type="submit">Submit Complaint</button>
+        </form>
+      </div>
+
+      <div className="section-card">
+        <h3>My Complaints</h3>
+        {complaints.length === 0 && <p>No complaints filed yet.</p>}
+        <ul className="card-grid">
+          {complaints.map((c) => (
+            <li key={c._id}>
+              <strong>{c.title}</strong>
+              <span className={`badge badge-${c.status}`}>{c.status}</span>
+              <br />
+              {c.description}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -75,5 +75,29 @@ const getMyRoom = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+const updateRoom = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { roomNumber, block, capacity } = req.body;
 
-module.exports = { addRoom, getAllRooms, getRoomsByBlock, allotRoom, deleteRoom,getMyRoom };
+    const room = await Room.findById(id);
+    if (!room) {
+      return res.status(404).json({ message: 'Room not found' });
+    }
+
+    if (capacity < room.studentsAllotted.length) {
+      return res.status(400).json({ message: 'Capacity cannot be less than students already allotted' });
+    }
+
+    room.roomNumber = roomNumber;
+    room.block = block;
+    room.capacity = capacity;
+    room.status = room.studentsAllotted.length >= capacity ? 'full' : 'available';
+
+    await room.save();
+    res.status(200).json({ message: 'Room updated successfully', room });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+module.exports = { addRoom, getAllRooms, getRoomsByBlock, allotRoom, deleteRoom,getMyRoom,updateRoom};

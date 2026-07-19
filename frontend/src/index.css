@@ -369,3 +369,96 @@ a {
 .cancel-btn:hover {
   background-color: #4b5563;
 }
+/* Dashboard Sections */
+.section-card {
+  background: #fafbfc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section-card h3 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Grid layout for rooms/complaints */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.card-grid li {
+  margin-bottom: 0;
+}
+
+/* Status badges */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-resolved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-available {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-full {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Card action buttons row */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.card-actions button {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.btn-danger {
+  background-color: #dc2626 !important;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c !important;
+}
+
+/* Inline forms inside cards */
+li form {
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+li form input, li form select {
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+/* Welcome text */
+.welcome-text {
+  color: #4b5563;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
