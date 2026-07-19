@@ -1,0 +1,5 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="#1e3a5f"/>
+  <path d="M20 8L11 12V20C11 26.5 15 31 20 33C25 31 29 26.5 29 20V12L20 8Z" fill="none" stroke="white" stroke-width="1.8"/>
+  <text x="20" y="24" text-anchor="middle" fill="white" font-size="12" font-weight="600" font-family="Arial, sans-serif">E</text>
+</svg>
