@@ -16,11 +16,12 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'warden', 'student'],
+    enum: ['superadmin', 'subadmin', 'student'],
     required: true
   },
-  block: {
-    type: String,
+   hostel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Hostel',
     default: null
   }
 }, { timestamps: true });

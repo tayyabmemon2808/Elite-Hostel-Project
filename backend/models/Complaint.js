@@ -6,8 +6,9 @@ const complaintSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  block: {
-    type: String,
+  hostel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Hostel',
     required: true
   },
   title: {

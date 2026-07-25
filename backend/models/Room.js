@@ -6,8 +6,14 @@ const roomSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  block: {
+  hostel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Hostel',
+    required: true
+  },
+  roomType: {
     type: String,
+    enum: ['single', 'shared'],
     required: true
   },
   capacity: {
