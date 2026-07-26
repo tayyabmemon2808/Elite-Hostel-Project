@@ -1,33 +1,35 @@
 const Complaint = require('../models/Complaint');
+
 const fileComplaint = async (req, res) => {
   try {
-    const { student, block, title, description } = req.body;
-
-    const newComplaint = new Complaint({ student, block, title, description });
+    const { student, hostel, title, description } = req.body;
+    const newComplaint = new Complaint({ student, hostel, title, description });
     await newComplaint.save();
-
     res.status(201).json({ message: 'Complaint filed successfully', complaint: newComplaint });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
 const getAllComplaints = async (req, res) => {
   try {
-    const complaints = await Complaint.find().populate('student', 'name email');
+    const complaints = await Complaint.find().populate('student', 'name email').populate('hostel', 'name city');
     res.status(200).json(complaints);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-const getComplaintsByBlock = async (req, res) => {
+
+const getComplaintsByHostel = async (req, res) => {
   try {
-    const { block } = req.params;
-    const complaints = await Complaint.find({ block }).populate('student', 'name email');
+    const { hostelId } = req.params;
+    const complaints = await Complaint.find({ hostel: hostelId }).populate('student', 'name email');
     res.status(200).json(complaints);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
 const resolveComplaint = async (req, res) => {
   try {
     const { id } = req.params;
@@ -38,4 +40,4 @@ const resolveComplaint = async (req, res) => {
   }
 };
 
-module.exports = { fileComplaint, getAllComplaints, getComplaintsByBlock, resolveComplaint };
+module.exports = { fileComplaint, getAllComplaints, getComplaintsByHostel, resolveComplaint };
