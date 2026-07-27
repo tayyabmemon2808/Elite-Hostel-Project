@@ -31,8 +31,8 @@ function Login() {
       setSuccess(true);
 
       setTimeout(() => {
-        if (user.role === 'admin') navigate('/admin-dashboard');
-        else if (user.role === 'warden') navigate('/warden-dashboard');
+        if (user.role === 'superadmin') navigate('/superadmin-dashboard');
+        else if (user.role === 'subadmin') navigate('/subadmin-dashboard');
         else navigate('/student-dashboard');
       }, 1200);
 
