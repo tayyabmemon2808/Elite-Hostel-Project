@@ -30,6 +30,7 @@ const HostelSchema = new mongoose.Schema({
     subAdmin : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User",
+        default : null
     }
 
 },{timestamps: true})

@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
     },
     hostel : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : "Hostel"
+        ref : "Hostel",
+        default : null
     }
 },{timestamps: true})
 
