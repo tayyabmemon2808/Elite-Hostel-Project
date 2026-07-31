@@ -23,7 +23,19 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'resolved'],
     default: 'pending'
+  },
+  adminReply: {
+    type : String,
+    dafault : ""
+  },
+  studentRating: {
+    type : Number , 
+    min : 1,
+    max: 5, 
+    dafault: null
   }
+
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Complaint', complaintSchema);

@@ -1,4 +1,4 @@
-const Complaint = require('../models/Complaint');
+const Complaint = require("../models/Complaint");
 
 const fileComplaint = async (req, res) => {
   try {
@@ -33,11 +33,46 @@ const getComplaintsByHostel = async (req, res) => {
 const resolveComplaint = async (req, res) => {
   try {
     const { id } = req.params;
-    const complaint = await Complaint.findByIdAndUpdate(id, { status: 'resolved' }, { new: true });
+    const {adminReply} = req.body;
+
+    const complaint = await Complaint.findByIdAndUpdate(id, { status: 'resolved', adminReply }, { new: true });
     res.status(200).json({ message: 'Complaint resolved', complaint });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+
+ 
+
+};
+
+const rateComplaint = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { studentRating } = req.body;
+    const complaint = await Complaint.findByIdAndUpdate(
+      id,
+      { studentRating },
+      { new: true }
+    );
+    res.status(200).json({ message: 'Rating submitted', complaint });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
 
-module.exports = { fileComplaint, getAllComplaints, getComplaintsByHostel, resolveComplaint };
+ const reopenComplaint = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const complaint = await Complaint.findByIdAndUpdate(
+      id,
+      { status: 'pending' },
+      { new: true }
+    );
+    res.status(200).json({ message: 'Complaint reopened', complaint });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+
+module.exports = { fileComplaint, getAllComplaints, getComplaintsByHostel, resolveComplaint ,reopenComplaint, rateComplaint };

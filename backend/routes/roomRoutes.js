@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   addRoom, getAllRooms, getRoomsByHostel, allotRoom, deleteRoom, updateRoom, getMyRoom
-} = require('../controllers/roomController');
+} = require("../controllers/roomControllers");
 
 router.post('/add', addRoom);
 router.get('/all', getAllRooms);

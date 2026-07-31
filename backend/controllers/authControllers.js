@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const BookingRequest = require('../models/BookingRequest');
+const BookingRequest = require("../models/BookingRequest");
 const bcrypt = require('bcryptjs');
 
 const signup = async (req, res) => {

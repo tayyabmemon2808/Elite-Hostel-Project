@@ -22,7 +22,7 @@ const bookingRequestSchema = new mongooose.Schema({
     required: true
   },
   hostel: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongooose.Schema.Types.ObjectId,
     ref: 'Hostel',
     required: true
   },
@@ -65,4 +65,4 @@ const bookingRequestSchema = new mongooose.Schema({
 },{
     timestamps: true
 });
-module.exports = mongoose.model("BookingRequest" , bookingRequestSchema)
+module.exports = mongooose.model("BookingRequest" , bookingRequestSchema)
