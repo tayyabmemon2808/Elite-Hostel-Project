@@ -95,6 +95,19 @@ const getAllStudents = async (req, res) => {
   }
 };
 
+const getAllSubadmins = async (req,res) => {
+  try{
+    const subadmins = await User.find({role : "subadmin"}).select("-password");
+    res.status(200).json(subadmins)
+  }
+  catch(error){
+    res.status(500).json({
+      message : "server error" ,
+      error: error.message
+    })
+  }
+}
+
 const updateProfile = async (req, res) => {
   try {
     const { id } = req.params;
@@ -125,4 +138,4 @@ const assignHostel = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, getAllStudents, updateProfile, assignHostel };
+module.exports = { signup, login, getAllStudents, updateProfile, assignHostel,getAllSubadmins };

@@ -5,6 +5,8 @@ const checkoutStay = async (req, res) => {
   try {
     const { id } = req.params;
 
+    
+
     const updatedEntry = await StayHistory.findByIdAndUpdate(
       id,
       { checkOutDate: new Date(), status: 'completed' },

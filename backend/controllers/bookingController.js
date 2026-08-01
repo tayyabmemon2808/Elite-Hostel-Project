@@ -10,7 +10,15 @@ const createBooking = async (req, res) => {
       return res.status(404).json({ message: 'Hostel not found' });
     }
 
-    const calculatedPrice = roomType === 'single' ? hostelData.singleRoomPrice : hostelData.sharedRoomPrice;
+    const monthlyRate = roomType === "single" ? hostelData.singleRoomPrice : hostelData.sharedRoomPrice;
+
+     const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+    const totalMonths = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24 * 30) )
+
+
+    const calculatedPrice = monthlyRate * totalMonths;
+
     const referenceId = 'BK-' + Math.random().toString(36).substring(2, 9).toUpperCase();
 
     const newBooking = new BookingRequest({
