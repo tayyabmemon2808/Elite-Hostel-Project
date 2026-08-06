@@ -1,4 +1,6 @@
-function Loader({ text }) {
+import "./Loader.css";
+
+function Loader({ text = "Loading..." }) {
   return (
     <div className="loader-overlay">
       <div className="loader-box">

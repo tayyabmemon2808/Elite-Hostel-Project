@@ -1,0 +1,114 @@
+.hostel-detail-page {
+  min-height: 100vh;
+}
+
+.not-found {
+  text-align: center;
+  padding: 60px;
+  color: #777;
+}
+
+.detail-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.gallery {
+  flex: 1;
+  min-width: 300px;
+}
+
+.gallery-main {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gallery-thumb {
+  width: 70px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+}
+
+.gallery-thumb.active {
+  opacity: 1;
+  border-color: #2563eb;
+}
+
+.detail-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.detail-info h1 {
+  color: #1e3a5f;
+  font-size: 28px;
+  margin: 0 0 8px 0;
+}
+
+.detail-address {
+  color: #777;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+.detail-description {
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.price-cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.price-card {
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 14px 20px;
+  flex: 1;
+}
+
+.price-label {
+  font-size: 13px;
+  color: #777;
+  margin: 0 0 4px 0;
+}
+
+.price-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin: 0;
+}
+
+.book-btn {
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.book-btn:hover {
+  background: #1d4ed8;
+}

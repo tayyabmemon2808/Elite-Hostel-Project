@@ -1,0 +1,158 @@
+.status-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.status-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 0 20px 60px;
+  text-align: center;
+}
+
+.status-container h2 {
+  color: #1e3a5f;
+  font-size: 26px;
+  margin: 0 0 6px 0;
+}
+
+.status-subtitle {
+  color: #777;
+  font-size: 14px;
+  margin: 0 0 24px 0;
+}
+
+.status-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.status-form input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.status-form input:focus {
+  outline: none;
+  border-color: #1e3a5f;
+}
+
+.status-form button {
+  background: #1e3a5f;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-form button:hover {
+  background: #16304d;
+}
+
+.status-error {
+  background: #fdecea;
+  color: #b3261e;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.status-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 26px;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-top: 5px solid #ccc;
+}
+
+.status-card.status-pending {
+  border-top-color: #f59e0b;
+}
+
+.status-card.status-approved {
+  border-top-color: #22c55e;
+}
+
+.status-card.status-rejected {
+  border-top-color: #ef4444;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.status-pending .status-badge {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-approved .status-badge {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-rejected .status-badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-card h3 {
+  margin: 0 0 16px 0;
+  color: #1e3a5f;
+  font-size: 18px;
+}
+
+.status-details {
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 6px 0;
+  color: #444;
+}
+
+.status-row span {
+  color: #888;
+}
+
+.complete-signup-btn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  background: #22c55e;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.complete-signup-btn:hover {
+  background: #16a34a;
+}
+
+.status-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #777;
+  text-align: center;
+}

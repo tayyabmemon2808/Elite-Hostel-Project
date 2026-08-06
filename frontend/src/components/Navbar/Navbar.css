@@ -1,0 +1,83 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand a {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 28px;
+}
+
+.navbar-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.navbar-links a:hover {
+  color: #2563eb;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-outline {
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  padding: 7px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.navbar-brand a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  width: 34px;
+  height: 34px;
+}
+.btn-text {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-text:hover {
+  color: #1e3a5f;
+}
