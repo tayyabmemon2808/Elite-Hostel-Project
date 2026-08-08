@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/Api";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const CreateSubAdminTab = () => {
   const [form, setForm] = useState({
@@ -14,7 +15,9 @@ const CreateSubAdminTab = () => {
   const [subAdmins, setSubAdmins] = useState([]);
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loaderText, setLoaderText] = useState("");
   const [toast, setToast] = useState(null);
+   const [showPassword, setShowPassword] = useState(false);
 
   const showToast = (message, type = "success") => {
     setToast({ message, type });
@@ -62,6 +65,20 @@ const CreateSubAdminTab = () => {
       setLoading(false);
     }
   };
+    const handleDeleteSubAdmin = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this sub-admin?")) return;
+    setLoading(true);
+    setLoaderText("Deleting sub-admin...");
+    try {
+      await api.delete(`/auth/${id}`);
+      showToast("User deleted successfully");
+      fetchSubAdmins();
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to delete sub-admin", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getHostelName = (hostelId) => {
     const match = hostels.find((h) => h._id === hostelId);
@@ -91,14 +108,27 @@ const CreateSubAdminTab = () => {
           onChange={handleChange}
           required
         />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+      <div className="password-input-wrapper">
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    value={form.password}
+    onChange={handleChange}
+    required
+  />
+
+  <span
+    className="password-toggle-icon"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? (
+      <IoEyeOffOutline size={18} />
+    ) : (
+      <IoEyeOutline size={18} />
+    )}
+  </span>
+</div>
         <input
   type="text"
   name="phone"
@@ -128,7 +158,7 @@ const CreateSubAdminTab = () => {
         </button>
       </form>
 
-      <h3 className="group-title">Existing Sub-Admins</h3>
+        <h3 className="group-title">Existing Sub-Admins</h3>
       {subAdmins.length === 0 ? (
         <p className="empty-state">No sub-admins yet.</p>
       ) : (
@@ -140,6 +170,14 @@ const CreateSubAdminTab = () => {
               <p className="assigned-subadmin">
                 Hostel: {getHostelName(sa.hostel)}
               </p>
+              <div className="hostel-card-actions">
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteSubAdmin(sa._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-  signup, login, getAllStudents, getAllSubadmins, updateProfile, assignHostel,uploadProfilePhoto
+  signup, login, getAllStudents, getAllSubadmins, updateProfile, assignHostel,uploadProfilePhoto,deleteUser
 } = require("../controllers/authControllers");
 const validateSignup = require('../middleware/validateSignup');
 const { protect, authorize } = require('../middleware/authMiddleware');
@@ -15,5 +15,6 @@ router.get('/students', protect, authorize('superadmin', 'subadmin'), getAllStud
 router.get('/subadmins', protect, authorize('superadmin'), getAllSubadmins);
 router.put('/update/:id', protect, updateProfile);
 router.put('/assign-hostel/:id', protect, authorize('superadmin'), assignHostel);
+router.delete('/:id', protect, authorize('superadmin'), deleteUser);
 
 module.exports = router;
