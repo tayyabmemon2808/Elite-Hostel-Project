@@ -1,275 +1,729 @@
+/* =========================================================
+   ELITE HOSTEL - LANDING PAGE
+   Premium / Modern / Responsive Design
+   ========================================================= */
+
 .landing-page {
   width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #172b4d;
 }
 
-/* Hero Section */
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
 .hero {
   position: relative;
-  background: url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1600")
-    center/cover no-repeat;
-  padding: 120px 20px;
+
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 100px 24px;
+
   text-align: center;
+
+  background:
+    url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1600")
+    center / cover no-repeat;
+
   overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15, 35, 60, 0.88),
+      rgba(30, 58, 95, 0.68),
+      rgba(13, 148, 136, 0.32)
+    );
+
+  z-index: 0;
 }
 
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(51, 87, 134, 0), rgba(32, 166, 223, 0.447));
+
+  background:
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(37, 99, 235, 0.2),
+      transparent 40%
+    );
+
+  z-index: 0;
 }
 
 .hero-content {
   position: relative;
+
   z-index: 1;
-  color: #fff;
+
+  width: 100%;
+  max-width: 760px;
+
+  color: #ffffff;
+
+  animation: heroFadeIn 0.8s ease-out;
 }
 
 .hero-content h1 {
-  font-size: 40px;
-  margin: 0 0 16px 0;
-  color: #fff;
+  max-width: 760px;
+
+  margin: 0 auto 20px;
+
+  color: #ffffff;
+
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 800;
+
+  line-height: 1.1;
+  letter-spacing: -1.2px;
 }
 
 .hero-content p {
-  font-size: 16px;
-  max-width: 560px;
-  margin: 0 auto 28px auto;
-  opacity: 0.9;
+  max-width: 620px;
+
+  margin: 0 auto 32px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 17px;
+  line-height: 1.7;
 }
 
 .hero-btn {
-  display: inline-block;
-  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 150px;
+
+  padding: 13px 28px;
+
+  background: #ffffff;
   color: #1e3a5f;
-  padding: 12px 32px;
-  border-radius: 6px;
-  font-weight: 600;
+
+  border: 2px solid #ffffff;
+  border-radius: 9px;
+
   text-decoration: none;
-  font-size: 15px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .hero-btn:hover {
-  background: #f0f0f0;
+  background: #1e3a5f;
+  color: #ffffff;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Hostels Section */
+/* =========================================================
+   HOSTELS SECTION
+   ========================================================= */
+
 .hostels-section {
-  padding: 60px 40px;
+  padding: 90px 40px;
+
+  background: #ffffff;
+
   text-align: center;
-   scroll-margin-top: 70px;
+
+  scroll-margin-top: 80px;
 }
 
 .hostels-section h2 {
-  font-size: 28px;
-  color: #1e3a5f;
-  margin: 0 0 8px 0;
+  margin: 0 0 10px;
+
+  color: #172b4d;
+
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
 
 .section-subtitle {
-  color: #777;
-  font-size: 14px;
-  margin: 0 0 36px 0;
+  max-width: 600px;
+
+  margin: 0 auto 45px;
+
+  color: #64748b;
+
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .no-hostels {
-  color: #999;
+  padding: 50px 20px;
+
+  color: #94a3b8;
+
   font-size: 14px;
 }
+
+/* =========================================================
+   HOSTEL GRID
+   ========================================================= */
 
 .hostels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  max-width: 1100px;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(270px, 1fr)
+  );
+
+  gap: 26px;
+
+  width: 100%;
+  max-width: 1120px;
+
   margin: 0 auto;
+
+  text-align: left;
 }
 
+/* =========================================================
+   HOSTEL CARD
+   ========================================================= */
+
 .hostel-card {
-  background: #fff;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  transition: transform 0.2s ease;
+
+  box-shadow:
+    0 5px 18px rgba(15, 23, 42, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .hostel-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-7px);
+
+  border-color: #d6e2f0;
+
+  box-shadow:
+    0 15px 35px rgba(15, 23, 42, 0.12);
 }
+
+/* =========================================================
+   HOSTEL IMAGE
+   ========================================================= */
 
 .hostel-card-img {
+  display: block;
+
   width: 100%;
-  height: 180px;
+  height: 205px;
+
   object-fit: cover;
+
+  transition: transform 0.4s ease;
 }
 
+.hostel-card:hover .hostel-card-img {
+  transform: scale(1.035);
+}
+
+/* =========================================================
+   HOSTEL CARD BODY
+   ========================================================= */
+
 .hostel-card-body {
-  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  padding: 21px;
 }
 
 .hostel-card-body h3 {
-  margin: 0 0 4px 0;
-  font-size: 17px;
-  color: #1e3a5f;
+  margin: 0 0 7px;
+
+  color: #172b4d;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  line-height: 1.4;
 }
 
 .hostel-city {
-  color: #777;
+  margin: 0 0 13px;
+
+  color: #64748b;
+
   font-size: 13px;
-  margin: 0 0 10px 0;
 }
 
 .hostel-price {
+  margin: 0 0 18px;
+
   color: #2563eb;
-  font-weight: 600;
-  font-size: 14px;
-  margin: 0 0 14px 0;
+
+  font-size: 15px;
+  font-weight: 700;
 }
 
+/* =========================================================
+   HOSTEL VIEW BUTTON
+   ========================================================= */
+
 .hostel-view-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: auto;
+
+  padding: 10px 18px;
+
   background: #1e3a5f;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
+  color: #ffffff;
+
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+
   text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .hostel-view-btn:hover {
   background: #16304d;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(30, 58, 95, 0.2);
 }
 
-/* Reviews Section */
+/* =========================================================
+   REVIEWS SECTION
+   ========================================================= */
+
 .reviews-section {
-  background: #f5f7fa;
-  padding: 60px 40px;
+  padding: 90px 40px;
+
+  background: #f7f9fc;
+
   text-align: center;
- scroll-margin-top: 70px;
+
+  scroll-margin-top: 80px;
 }
 
 .reviews-section h2 {
-  font-size: 28px;
-  color: #1e3a5f;
-  margin: 0 0 36px 0;
+  margin: 0 0 42px;
+
+  color: #172b4d;
+
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
+
+/* =========================================================
+   REVIEWS GRID
+   ========================================================= */
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
 
-.review-card {
-  background: #fff;
-  padding: 24px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  );
+
+  gap: 22px;
+
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
   text-align: left;
 }
 
+/* =========================================================
+   REVIEW CARD
+   ========================================================= */
+
+.review-card {
+  position: relative;
+
+  background: #ffffff;
+
+  padding: 26px;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 13px;
+
+  box-shadow:
+    0 5px 18px rgba(15, 23, 42, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.review-card::before {
+  content: "“";
+
+  position: absolute;
+
+  top: 12px;
+  right: 20px;
+
+  color: #dbeafe;
+
+  font-size: 52px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.09);
+}
+
 .review-text {
+  position: relative;
+
+  z-index: 1;
+
+  margin: 0 0 17px;
+
+  color: #475569;
+
   font-size: 14px;
-  color: #444;
-  line-height: 1.6;
-  margin: 0 0 12px 0;
+  line-height: 1.75;
 }
 
 .review-author {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1e3a5f;
   margin: 0;
+
+  color: #1e3a5f;
+
+  font-size: 13px;
+  font-weight: 700;
 }
 
-/* ================= Footer ================= */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .footer {
-  background: linear-gradient(135deg, #1e3a5f, #2d5b8a);
-  color: #fff;
+  margin-top: 0;
+
+  padding: 65px 30px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #142b47,
+      #1e3a5f
+    );
+
+  color: #ffffff;
+
   text-align: center;
-  padding: 50px 20px 25px;
-  margin-top: 60px;
+}
+
+.footer-content {
+  display: flex;
+
+  justify-content: space-between;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  gap: 40px;
+
+  text-align: left;
+
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+
+  min-width: 220px;
+}
+
+.footer-section h3 {
+  margin: 0 0 15px;
+
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-section p {
+  margin: 8px 0;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .footer h3 {
-  font-size: 26px;
-  font-weight: 700;
+  color: #ffffff;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+
   margin-bottom: 12px;
-  letter-spacing: 1px;
 }
 
 .footer p {
   margin: 8px 0;
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.9);
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 14px;
   line-height: 1.7;
 }
 
 .footer p:last-child {
-  margin-top: 25px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
+  margin-top: 30px;
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 12px;
 }
 
-/* Optional Hover Effect */
-
 .footer a {
-  color: #ffd166;
+  color: #5eead4;
+
   text-decoration: none;
-  transition: color 0.3s ease;
+
+  transition:
+    color 0.2s ease;
 }
 
 .footer a:hover {
   color: #ffffff;
 }
+
 .footer hr {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 25px auto 0;
   max-width: 1100px;
+
+  margin: 30px auto 0;
+
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-/* Responsive */
+/* =========================================================
+   ANIMATION
+   ========================================================= */
 
-@media (max-width: 768px) {
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 480px;
+    padding: 90px 25px;
+  }
+
+  .hostels-section,
+  .reviews-section {
+    padding: 75px 25px;
+  }
+
+  .hostels-grid {
+    gap: 20px;
+  }
+
+  .reviews-grid {
+    gap: 18px;
+  }
+
   .footer {
-    padding: 40px 15px 20px;
+    padding: 55px 25px 25px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 500px;
+
+    padding: 80px 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+    letter-spacing: -0.7px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    line-height: 1.65;
+
+    margin-bottom: 27px;
+  }
+
+  .hero-btn {
+    width: 100%;
+    max-width: 220px;
+
+    padding: 12px 22px;
+  }
+
+  .hostels-section,
+  .reviews-section {
+    padding: 65px 18px;
+  }
+
+  .hostels-section h2,
+  .reviews-section h2 {
+    font-size: 28px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .hostels-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .hostel-card-img {
+    height: 210px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .review-card {
+    padding: 22px;
+  }
+
+  .footer {
+    padding: 50px 20px 22px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+
+    gap: 25px;
+
+    text-align: center;
+  }
+
+  .footer-section {
+    min-width: 100%;
   }
 
   .footer h3 {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .footer p {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
-.footer-content{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:30px;
-    max-width:1100px;
-    margin:auto;
-}
 
-.footer-section{
-    flex:1;
-    min-width:220px;
-}
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
-.footer-section h3{
-    margin-bottom:15px;
-}
+@media (max-width: 380px) {
+  .hero {
+    min-height: 470px;
+  }
 
-.footer-section p{
-    margin:8px 0;
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+  .hostel-card-img {
+    height: 190px;
+  }
 }

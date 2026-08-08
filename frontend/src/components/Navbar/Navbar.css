@@ -1,83 +1,722 @@
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 40px;
-  background: #fff;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+
+  width: 100%;
+  min-height: 68px;
+  padding: 0 40px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf3;
+
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
+/* =========================================================
+   BRAND
+   ========================================================= */
+
 .navbar-brand a {
-  font-size: 22px;
-  font-weight: 700;
-  color: #2563eb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #172b4d;
   text-decoration: none;
+
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+
+  transition: color 0.2s ease;
 }
+
+.navbar-brand a:hover {
+  color: #2563eb;
+}
+
+.navbar-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
 
 .navbar-links {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 30px;
 }
 
 .navbar-links a {
-  color: #333;
+  position: relative;
+
+  color: #475569;
   text-decoration: none;
-  font-size: 15px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 24px 0;
+
+  transition:
+    color 0.2s ease;
+}
+
+.navbar-links a::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+
+  width: 0;
+  height: 2px;
+
+  background: #2563eb;
+  border-radius: 10px;
+
+  transition: width 0.25s ease;
 }
 
 .navbar-links a:hover {
   color: #2563eb;
 }
 
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+/* =========================================================
+   RIGHT ACTIONS
+   ========================================================= */
+
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
 
 .btn-primary {
-  background: #2563eb;
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #1e3a5f;
+  color: #ffffff;
+
+  padding: 9px 18px;
+
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(30, 58, 95, 0.15);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+.btn-primary:hover {
+  background: #16304d;
+  border-color: #16304d;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(30, 58, 95, 0.2);
+}
+
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
 
 .btn-outline {
-  border: 1px solid #2563eb;
-  color: #2563eb;
-  padding: 7px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-}
-.navbar-brand a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #1e3a5f;
+  justify-content: center;
+
+  background: #ffffff;
+  color: #2563eb;
+
+  padding: 8px 17px;
+
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+
   text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.navbar-logo {
-  width: 34px;
-  height: 34px;
+.btn-outline:hover,
+.navbar-actions .btn-outline:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  transform: translateY(-1px);
 }
+
+/* =========================================================
+   TEXT BUTTON
+   ========================================================= */
+
 .btn-text {
-  color: #555;
+  color: #64748b;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: color 0.2s ease;
 }
 
 .btn-text:hover {
   color: #1e3a5f;
+}
+
+/* =========================================================
+   HOSTEL TAG
+   ========================================================= */
+
+.navbar-hostel-tag {
+  display: inline-flex;
+  align-items: center;
+
+  background: #ecfdf5;
+  color: #047857;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  padding: 6px 11px;
+
+  border: 1px solid #d1fae5;
+  border-radius: 20px;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PROFILE BUTTON
+   ========================================================= */
+
+.navbar-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: transparent;
+  border: none;
+
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 7px 10px;
+  border-radius: 8px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.navbar-profile-btn:hover {
+  background: #f1f5f9;
+  color: #1e3a5f;
+}
+
+/* =========================================================
+   PROFILE IMAGE
+   ========================================================= */
+
+.navbar-profile-img {
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 2px solid #e2e8f0;
+}
+
+/* =========================================================
+   PROFILE FORM
+   ========================================================= */
+
+.profile-form .form-group {
+  margin-bottom: 18px;
+}
+
+.profile-form label {
+  display: block;
+
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 7px;
+}
+
+.profile-form input {
+  width: 100%;
+  padding: 11px 13px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #d7dee8;
+  border-radius: 8px;
+
+  color: #1e293b;
+  font-size: 14px;
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.profile-form input:focus {
+  outline: none;
+
+  border-color: #2563eb;
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =========================================================
+   PROFILE ALERTS
+   ========================================================= */
+
+.profile-error {
+  background: #fef2f2;
+  color: #b91c1c;
+
+  padding: 11px 14px;
+
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.profile-success {
+  text-align: center;
+
+  background: #f0fdf4;
+  color: #15803d;
+
+  padding: 14px;
+
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   PROFILE SAVE BUTTON
+   ========================================================= */
+
+.profile-save-btn {
+  width: 100%;
+
+  background: #1e3a5f;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-top: 6px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.profile-save-btn:hover {
+  background: #16304d;
+  transform: translateY(-1px);
+
+  box-shadow: 0 5px 12px rgba(30, 58, 95, 0.18);
+}
+
+.profile-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================================
+   PASSWORD INPUT
+   ========================================================= */
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 44px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+
+  right: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.password-toggle-icon:hover {
+  color: #2563eb;
+}
+
+/* =========================================================
+   PASSWORD TOGGLE LINK
+   ========================================================= */
+
+.toggle-password-link {
+  background: none;
+  border: none;
+
+  color: #2563eb;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 0;
+  margin-bottom: 16px;
+
+  text-align: left;
+
+  transition: color 0.2s ease;
+}
+
+.toggle-password-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   PASSWORD SECTION
+   ========================================================= */
+
+.password-section {
+  background: #f8fafc;
+
+  border: 1px solid #e8edf3;
+  border-radius: 10px;
+
+  padding: 16px;
+
+  margin-bottom: 18px;
+}
+
+.password-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 14px;
+
+  color: #1e3a5f;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cancel-password-link {
+  background: none;
+  border: none;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+
+  cursor: pointer;
+  padding: 0;
+
+  transition: color 0.2s ease;
+}
+
+.cancel-password-link:hover {
+  color: #dc2626;
+}
+
+/* =========================================================
+   AVATAR UPLOAD
+   ========================================================= */
+
+.avatar-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+
+  margin-bottom: 24px;
+}
+
+.avatar-circle {
+  width: 92px;
+  height: 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #eff6ff;
+
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+
+  box-shadow:
+    0 4px 14px rgba(15, 23, 42, 0.12),
+    0 0 0 1px #e2e8f0;
+}
+
+.avatar-circle img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  color: #1e3a5f;
+
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   AVATAR EDIT BUTTON
+   ========================================================= */
+
+.avatar-edit-btn {
+  position: absolute;
+
+  top: 64px;
+  left: calc(50% + 22px);
+
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.avatar-edit-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.avatar-edit-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.avatar-uploading-text {
+  color: #64748b;
+
+  font-size: 12px;
+
+  margin-top: 9px;
+}
+
+/* =========================================================
+   NAVBAR RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 22px;
+  }
+
+  .navbar-links {
+    gap: 20px;
+  }
+
+  .navbar-links a {
+    font-size: 13px;
+  }
+
+  .navbar-hostel-tag {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    min-height: 64px;
+    padding: 0 16px;
+  }
+
+  .navbar-brand a {
+    font-size: 18px;
+  }
+
+  .navbar-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .navbar-links {
+    gap: 14px;
+  }
+
+  .navbar-links a {
+    font-size: 12px;
+    padding: 23px 0;
+  }
+
+  .navbar-actions {
+    gap: 6px;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .btn-text {
+    font-size: 12px;
+  }
+
+  .navbar-profile-btn {
+    padding: 5px;
+  }
+
+  .navbar-profile-btn span {
+    display: none;
+  }
+
+  .navbar-profile-img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .navbar-brand {
+    flex: 1;
+  }
+
+  .navbar-links {
+    order: 3;
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 22px;
+
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .navbar-links a {
+    padding: 10px 0;
+  }
+
+  .navbar-links a::after {
+    bottom: 5px;
+  }
+
+  .navbar-actions {
+    gap: 5px;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 7px 10px;
+  }
 }

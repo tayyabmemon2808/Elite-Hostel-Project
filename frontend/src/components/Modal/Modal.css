@@ -1,47 +1,206 @@
+/* =========================================================
+   GLOBAL MODAL
+   ========================================================= */
+
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
   z-index: 9998;
+
+  animation: modalOverlayIn 0.2s ease-out;
 }
 
+/* =========================================================
+   Modal Box
+   ========================================================= */
+
 .modal-box {
-  background: #fff;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 450px;
+  width: 100%;
+  max-width: 480px;
   max-height: 85vh;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 16px;
+
   overflow-y: auto;
+
+  box-shadow:
+    0 24px 50px rgba(15, 23, 42, 0.18),
+    0 5px 15px rgba(15, 23, 42, 0.08);
+
+  animation: modalBoxIn 0.25s ease-out;
 }
+
+/* =========================================================
+   Modal Header
+   ========================================================= */
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #eee;
+
+  padding: 18px 22px;
+
+  border-bottom: 1px solid #edf1f5;
+  background: #ffffff;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .modal-header h3 {
   margin: 0;
+
+  color: #172b4d;
   font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
 }
+
+/* =========================================================
+   Close Button
+   ========================================================= */
 
 .modal-close-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #555;
+  width: 34px;
+  height: 34px;
+
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  color: #64748b;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
+.modal-close-btn:hover {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
+  transform: rotate(3deg);
+}
+
+.modal-close-btn:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.18);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Modal Content
+   ========================================================= */
+
 .modal-content {
-  padding: 20px;
+  padding: 22px;
+  color: #475569;
+}
+
+/* =========================================================
+   Scrollbar
+   ========================================================= */
+
+.modal-box::-webkit-scrollbar {
+  width: 7px;
+}
+
+.modal-box::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.modal-box::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =========================================================
+   Animations
+   ========================================================= */
+
+@keyframes modalOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalBoxIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .modal-overlay {
+    padding: 14px;
+    align-items: center;
+  }
+
+  .modal-box {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 13px;
+  }
+
+  .modal-header {
+    padding: 15px 17px;
+  }
+
+  .modal-header h3 {
+    font-size: 16px;
+  }
+
+  .modal-content {
+    padding: 18px 17px;
+  }
+
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+  }
 }

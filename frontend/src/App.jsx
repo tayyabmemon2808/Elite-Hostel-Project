@@ -5,11 +5,10 @@ import HostelDetail from "./pages/public/HostelDetail";
 import BookingForm from "./pages/public/BookingForm";
 import CheckStatus from "./pages/public/CheckStatus";
 import Signup from "./pages/public/Signup";
-
-
-const StudentDashboard = () => <h1>Student Dashboard</h1>;
-const SubAdminDashboard = () => <h1>Sub-Admin Dashboard</h1>;
-const SuperAdminDashboard = () => <h1>Super Admin Dashboard</h1>;
+import StudentDashboard from "./pages/student/StudentDashboard";
+import SubAdminDashboard from "./pages/subadmin/SubAdminDashboard";
+import SuperAdminDashboard from "./pages/superadmin/SuperAdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
   return (
@@ -22,9 +21,22 @@ function App() {
         <Route path="/check-status" element={<CheckStatus />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/subadmin/dashboard" element={<SubAdminDashboard />} />
-        <Route path="/superadmin/dashboard" element={<SuperAdminDashboard />} />
+        <Route path="/student/dashboard" element=
+        {
+          <ProtectedRoute allowedRole="student">
+        <StudentDashboard />
+        </ProtectedRoute>
+        } />
+        <Route path="/subadmin/dashboard" element={
+          <ProtectedRoute allowedRole="subadmin">
+          <SubAdminDashboard />
+          </ProtectedRoute>        
+          } />
+        <Route path="/superadmin/dashboard" element={
+          <ProtectedRoute allowedRole="superadmin">
+          <SuperAdminDashboard />
+          </ProtectedRoute>
+          } />
       </Routes>
     </BrowserRouter>
   );

@@ -1,19 +1,19 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const {
-    signup,
-    login,
-    getAllStudents,
-    updateProfile,
-    assignHostel,
-    getAllSubadmins
+  signup, login, getAllStudents, getAllSubadmins, updateProfile, assignHostel,uploadProfilePhoto
 } = require("../controllers/authControllers");
-const validateSignup = require("../middleware/ValidateSignup");
+const validateSignup = require('../middleware/validateSignup');
+const { protect, authorize } = require('../middleware/authMiddleware');
+const upload = require("../middleware/UploadHostel");
 
-router.post("/signup", validateSignup, signup);
-router.post("/login", login);
-router.get("/students", getAllStudents);
-router.put("/update/:id", updateProfile);
-router.put("/assign-hostel/:id", assignHostel);
-router.get("/subadmins", getAllSubadmins)
+router.put("/upload-photo/:id", protect, upload.single("profileImage"), uploadProfilePhoto);
+router.post('/signup', validateSignup, signup);
+router.post('/login', login);
+
+router.get('/students', protect, authorize('superadmin', 'subadmin'), getAllStudents);
+router.get('/subadmins', protect, authorize('superadmin'), getAllSubadmins);
+router.put('/update/:id', protect, updateProfile);
+router.put('/assign-hostel/:id', protect, authorize('superadmin'), assignHostel);
+
 module.exports = router;

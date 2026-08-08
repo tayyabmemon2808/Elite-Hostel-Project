@@ -22,7 +22,15 @@ const userSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "Hostel",
         default : null
-    }
+    },
+    phone: {
+  type: String,
+  default: ''
+},
+profileImage: {
+  type: String,
+  default: ""
+}
 },{timestamps: true})
 
-module.exports = mongoose.model("User",userSchema)
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

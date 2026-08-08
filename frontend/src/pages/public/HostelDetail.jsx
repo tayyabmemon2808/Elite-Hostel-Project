@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import api from "../../services/Api";
 import Navbar from "../../components/Navbar/Navbar";
 import Loader from "../../components/Loader/Loader";
+import { getImageUrl } from "../../utils/imageUrl";
 import "./HostelDatail.css";
 
 function HostelDetail() {
@@ -41,8 +42,9 @@ function HostelDetail() {
     );
   }
 
-  const images = hostel.images?.length ? hostel.images : [""];
-
+const images = hostel.images?.length
+  ? hostel.images.map((img) => getImageUrl(img))
+  : ["https://via.placeholder.com/700x400"];
   return (
     <div className="hostel-detail-page">
       <Navbar />

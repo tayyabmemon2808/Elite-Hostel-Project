@@ -1,114 +1,322 @@
+
+/* ================================
+   Hostel Detail Page
+================================ */
 .hostel-detail-page {
   min-height: 100vh;
+  padding: 1px 0 70px;
+  background: #f8fafc;
 }
 
+/* ================================
+   Not Found
+================================ */
 .not-found {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.6;
   text-align: center;
-  padding: 60px;
-  color: #777;
 }
 
+/* ================================
+   Detail Container
+================================ */
 .detail-container {
   display: flex;
-  gap: 40px;
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 20px;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 45px;
+  width: 100%;
+  max-width: 1150px;
+  box-sizing: border-box;
+  margin: 50px auto 0;
+  padding: 0 25px;
 }
 
+/* ================================
+   Gallery
+================================ */
 .gallery {
-  flex: 1;
+  flex: 1.1;
   min-width: 300px;
 }
 
 .gallery-main {
+  display: block;
   width: 100%;
-  height: 360px;
+  height: 390px;
   object-fit: cover;
-  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #e2e8f0;
+  box-shadow: 0 8px 25px rgba(15, 42, 67, 0.09);
 }
 
 .gallery-thumbs {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 13px;
 }
 
 .gallery-thumb {
-  width: 70px;
-  height: 55px;
+  width: 76px;
+  height: 58px;
+  padding: 0;
   object-fit: cover;
-  border-radius: 6px;
-  cursor: pointer;
-  opacity: 0.6;
   border: 2px solid transparent;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  opacity: 0.62;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
 .gallery-thumb.active {
   opacity: 1;
-  border-color: #2563eb;
+  border-color: #087f73;
+  box-shadow: 0 3px 10px rgba(8, 127, 115, 0.15);
 }
 
+/* ================================
+   Detail Information
+================================ */
 .detail-info {
-  flex: 1;
+  flex: 0.9;
   min-width: 300px;
+  padding: 8px 0;
 }
 
 .detail-info h1 {
-  color: #1e3a5f;
-  font-size: 28px;
-  margin: 0 0 8px 0;
+  margin: 0 0 10px;
+  color: #102a43;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .detail-address {
-  color: #777;
+  margin: 0 0 22px;
+  color: #64748b;
   font-size: 14px;
-  margin: 0 0 20px 0;
+  line-height: 1.6;
 }
 
 .detail-description {
-  color: #444;
-  line-height: 1.7;
-  margin-bottom: 24px;
+  margin: 0 0 28px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
+/* ================================
+   Price Cards
+================================ */
 .price-cards {
   display: flex;
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: 14px;
+  margin-bottom: 30px;
 }
 
 .price-card {
-  background: #f5f7fa;
-  border-radius: 8px;
-  padding: 14px 20px;
   flex: 1;
+  padding: 17px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 42, 67, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.price-card:hover {
+  border-color: #b9ded9;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 42, 67, 0.08);
 }
 
 .price-label {
-  font-size: 13px;
-  color: #777;
-  margin: 0 0 4px 0;
+  margin: 0 0 6px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .price-value {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1e3a5f;
   margin: 0;
+  color: #087f73;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 800;
 }
 
+/* ================================
+   Book Button
+================================ */
 .book-btn {
-  display: inline-block;
-  background: #2563eb;
-  color: #fff;
-  padding: 12px 30px;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 30px;
+  border-radius: 9px;
+  background: #123b5d;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
-  font-weight: 600;
+  box-shadow: 0 7px 18px rgba(18, 59, 93, 0.16);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .book-btn:hover {
-  background: #1d4ed8;
+  background: #087f73;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(8, 127, 115, 0.2);
 }
+
+.book-btn:active {
+  transform: translateY(0);
+}
+
+/* ================================
+   Tablet
+================================ */
+@media (max-width: 900px) {
+  .detail-container {
+    gap: 30px;
+  }
+
+  .gallery-main {
+    height: 340px;
+  }
+
+  .detail-info h1 {
+    font-size: 28px;
+  }
+}
+
+/* ================================
+   Mobile
+================================ */
+@media (max-width: 768px) {
+  .hostel-detail-page {
+    padding-bottom: 50px;
+  }
+
+  .detail-container {
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 35px;
+    padding: 0 18px;
+  }
+
+  .gallery,
+  .detail-info {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gallery-main {
+    height: 300px;
+    border-radius: 13px;
+  }
+
+  .gallery-thumbs {
+    gap: 8px;
+  }
+
+  .gallery-thumb {
+    width: 70px;
+    height: 54px;
+  }
+
+  .detail-info {
+    padding: 0;
+  }
+
+  .detail-info h1 {
+    font-size: 27px;
+  }
+
+  .detail-description {
+    line-height: 1.7;
+  }
+
+  .price-cards {
+    gap: 10px;
+  }
+
+  .price-card {
+    padding: 15px;
+  }
+
+  .book-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ================================
+   Small Mobile
+================================ */
+@media (max-width: 480px) {
+  .detail-container {
+    margin-top: 25px;
+    padding: 0 14px;
+  }
+
+  .gallery-main {
+    height: 235px;
+    border-radius: 11px;
+  }
+
+  .gallery-thumb {
+    width: 62px;
+    height: 48px;
+  }
+
+  .detail-info h1 {
+    font-size: 24px;
+  }
+
+  .detail-address {
+    font-size: 13px;
+  }
+
+  .detail-description {
+    font-size: 13px;
+  }
+
+  .price-cards {
+    flex-direction: column;
+  }
+
+  .price-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .book-btn {
+    min-height: 46px;
+    font-size: 14px;
+  }
+}
+

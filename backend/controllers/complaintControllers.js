@@ -29,6 +29,16 @@ const getComplaintsByHostel = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+const getMyComplaints = async (req, res) => {
+  try {
+    const { studentId } = req.params;
+    const complaints = await Complaint.find({ student: studentId })
+      .populate('hostel', 'name city');
+    res.status(200).json(complaints);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
 
 const resolveComplaint = async (req, res) => {
   try {
@@ -65,7 +75,7 @@ const rateComplaint = async (req, res) => {
     const { id } = req.params;
     const complaint = await Complaint.findByIdAndUpdate(
       id,
-      { status: 'pending' },
+      { status: 'pending' , studentRating: null },
       { new: true }
     );
     res.status(200).json({ message: 'Complaint reopened', complaint });
@@ -75,4 +85,4 @@ const rateComplaint = async (req, res) => {
 };
 
 
-module.exports = { fileComplaint, getAllComplaints, getComplaintsByHostel, resolveComplaint ,reopenComplaint, rateComplaint };
+module.exports = { fileComplaint, getAllComplaints, getComplaintsByHostel, resolveComplaint ,reopenComplaint, rateComplaint , getMyComplaints };

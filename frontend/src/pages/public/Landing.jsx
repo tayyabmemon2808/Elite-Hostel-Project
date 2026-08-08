@@ -1,13 +1,15 @@
 import api from "../../services/Api";
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useLocation } from "react-router-dom";
 import "./Landing.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Loader from "../../components/Loader/Loader";
+import { getImageUrl } from "../../utils/imageUrl";
 function Landing(){
 
   const [hostels , setHostels] = useState([]);
   const [loading , setLoading] = useState(true)
+   const location = useLocation();
 
   const fetchHostels = async () => {
        try {
@@ -23,6 +25,17 @@ function Landing(){
   useEffect(() => {
       fetchHostels();
 }, [])
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   return(
     <>
@@ -59,10 +72,14 @@ function Landing(){
           {hostels.map((hostel) => (
             <div className="hostel-card" key={hostel._id}>
               <img
-                src={hostel.images?.[0] || "https://tse1.mm.bing.net/th/id/OIP.h6lF--r-Kcw5p1UnDkRIdAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"}
-                alt={hostel.name}
-                className="hostel-card-img"
-              />
+  src={
+    hostel.images?.[0]
+      ? getImageUrl(hostel.images[0])
+      : "https://via.placeholder.com/300x200"
+  }
+  alt={hostel.name}
+  className="hostel-card-img"
+/>
               <div className="hostel-card-body">
                 <h3>{hostel.name}</h3>
                 <p className="hostel-city">{hostel.city}</p>
@@ -125,8 +142,8 @@ function Landing(){
 
         <div className="footer-section">
             <h3>Quick Links</h3>
-            <p><Link to="/">Home</Link></p>
-    <p><Link to="/">Hostels</Link></p>
+            <p><Link to="/"  onClick={() => window.scrollTo({top: 0 , behavior: "smooth"})}>Home</Link></p>
+    <p> <a href="#hostels-section">Hostels</a></p>
     <p><Link to="/book">Book Now</Link></p>
         </div>
 

@@ -1,13 +1,15 @@
 const User = require('../models/User');
+const Hostel = require("../models/Hostel")
 const BookingRequest = require("../models/BookingRequest");
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken")
 
 const signup = async (req, res) => {
   try {
     const { role, password } = req.body;
 
     if (role === 'superadmin' || role === 'subadmin') {
-      const { name, email, hostel } = req.body;
+      const { name, email, hostel , phone } = req.body;
 
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -16,11 +18,35 @@ const signup = async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
-        name, email, password: hashedPassword, role,
+        name, email, password: hashedPassword, role, phone,
         hostel: role === 'superadmin' ? null : hostel
       });
 
+   
+if (role === "subadmin" && hostel) {
+  const existingHostel = await Hostel.findById(hostel);
+
+  if (!existingHostel) {
+    return res.status(404).json({
+      message: "Hostel not found",
+    });
+  }
+
+  if (existingHostel.subAdmin) {
+    return res.status(400).json({
+      message: "This hostel already has a sub-admin assigned.",
+    });
+  }
+}
+
       await newUser.save();
+
+   
+      if (role === "subadmin" && hostel) {
+  await Hostel.findByIdAndUpdate(hostel, {
+    subAdmin: newUser._id,
+  }); 
+}
       return res.status(201).json({ message: 'User created successfully' });
     }
 
@@ -44,6 +70,7 @@ const signup = async (req, res) => {
     const newUser = new User({
       name: booking.name,
       email: booking.email,
+      phone: booking.phone,
       password: hashedPassword,
       role: 'student',
       hostel: booking.hostel
@@ -71,14 +98,23 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
+    const token = jwt.sign(
+      { id: user._id, role: user.role, hostel: user.hostel },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+
     res.status(200).json({
       message: 'Login successful',
+      token,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
-        hostel: user.hostel
+        hostel: user.hostel,
+          phone: user.phone,
+          profileImage: user.profileImage
       }
     });
   } catch (error) {
@@ -111,10 +147,25 @@ const getAllSubadmins = async (req,res) => {
 const updateProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { name, email, phone, password } = req.body;
+
+    if (!name || !email) {
+      return res.status(400).json({ message: 'Name and email are required' });
+    }
+
+    const updateData = { name, email };
+
+    if (phone !== undefined) {
+      updateData.phone = phone;
+    }
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateData.password = hashedPassword;
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
-      id, { name, email }, { new: true }
+      id, updateData, { new: true }
     ).select('-password');
 
     res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
@@ -122,7 +173,6 @@ const updateProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-
 const assignHostel = async (req, res) => {
   try {
     const { id } = req.params;
@@ -137,5 +187,21 @@ const assignHostel = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+const uploadProfilePhoto = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    const imageUrl = `/uploads/${req.file.filename}`;
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { profileImage: imageUrl },
+      { new: true }
+    ).select("-password");
+    res.status(200).json({ message: "Photo updated", user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
-module.exports = { signup, login, getAllStudents, updateProfile, assignHostel,getAllSubadmins };
+module.exports = { signup, login, getAllStudents, updateProfile, assignHostel,getAllSubadmins ,uploadProfilePhoto};

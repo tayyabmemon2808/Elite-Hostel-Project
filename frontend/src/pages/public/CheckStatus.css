@@ -1,27 +1,45 @@
+
+/* ================================
+   Status Page
+================================ */
 .status-page {
   min-height: 100vh;
-  background: #f5f7fa;
+  padding: 1px 0 60px;
+  background: #f8fafc;
 }
 
+/* ================================
+   Status Container
+================================ */
 .status-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 0 20px 60px;
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+  margin: 50px auto 0;
+  padding: 0 20px;
   text-align: center;
 }
 
 .status-container h2 {
-  color: #1e3a5f;
-  font-size: 26px;
-  margin: 0 0 6px 0;
+  margin: 0 0 8px;
+  color: #102a43;
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.4px;
 }
 
 .status-subtitle {
-  color: #777;
+  max-width: 450px;
+  margin: 0 auto 28px;
+  color: #64748b;
   font-size: 14px;
-  margin: 0 0 24px 0;
+  line-height: 1.7;
 }
 
+/* ================================
+   Search Form
+================================ */
 .status-form {
   display: flex;
   gap: 10px;
@@ -30,129 +48,342 @@
 
 .status-form input {
   flex: 1;
-  padding: 12px 14px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  min-width: 0;
+  min-height: 46px;
+  box-sizing: border-box;
+  padding: 0 14px;
+  border: 1px solid #d6dee6;
+  border-radius: 9px;
+  outline: none;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: inherit;
   font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.status-form input::placeholder {
+  color: #94a3b8;
+}
+
+.status-form input:hover {
+  border-color: #b8c6d3;
 }
 
 .status-form input:focus {
-  outline: none;
-  border-color: #1e3a5f;
+  border-color: #087f73;
+  box-shadow: 0 0 0 3px rgba(8, 127, 115, 0.1);
 }
 
 .status-form button {
-  background: #1e3a5f;
-  color: #fff;
+  min-height: 46px;
+  padding: 0 22px;
   border: none;
-  padding: 12px 22px;
-  border-radius: 6px;
+  border-radius: 9px;
+  background: #123b5d;
+  color: #ffffff;
+  font-family: inherit;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 5px 14px rgba(18, 59, 93, 0.14);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .status-form button:hover {
-  background: #16304d;
+  background: #087f73;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(8, 127, 115, 0.18);
 }
 
+.status-form button:active {
+  transform: translateY(0);
+}
+
+/* ================================
+   Error Message
+================================ */
 .status-error {
-  background: #fdecea;
-  color: #b3261e;
-  padding: 10px 14px;
-  border-radius: 6px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #fff1f2;
+  color: #b42318;
   font-size: 13px;
-  margin-bottom: 16px;
+  line-height: 1.5;
 }
 
+/* ================================
+   Status Card
+================================ */
 .status-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid #e3eaf0;
+  border-top: 5px solid #cbd5e1;
+  border-radius: 14px;
+  background: #ffffff;
   text-align: left;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  border-top: 5px solid #ccc;
+  box-shadow: 0 8px 28px rgba(15, 42, 67, 0.08);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
+.status-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 32px rgba(15, 42, 67, 0.1);
+}
+
+/* ================================
+   Status Variations
+================================ */
 .status-card.status-pending {
   border-top-color: #f59e0b;
 }
 
 .status-card.status-approved {
-  border-top-color: #22c55e;
+  border-top-color: #10b981;
 }
 
 .status-card.status-rejected {
   border-top-color: #ef4444;
 }
 
+/* ================================
+   Status Badge
+================================ */
 .status-badge {
-  display: inline-block;
-  padding: 4px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+  padding: 0 13px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 12px;
 }
 
 .status-pending .status-badge {
-  background: #fef3c7;
-  color: #92400e;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  color: #a16207;
 }
 
 .status-approved .status-badge {
-  background: #dcfce7;
-  color: #166534;
+  border: 1px solid #a7f3d0;
+  background: #ecfdf5;
+  color: #047857;
 }
 
 .status-rejected .status-badge {
-  background: #fee2e2;
-  color: #991b1b;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
+/* ================================
+   Status Heading
+================================ */
 .status-card h3 {
-  margin: 0 0 16px 0;
-  color: #1e3a5f;
-  font-size: 18px;
+  margin: 0 0 18px;
+  color: #102a43;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 750;
 }
 
+/* ================================
+   Status Details
+================================ */
 .status-details {
-  border-top: 1px solid #eee;
-  padding-top: 14px;
+  padding-top: 15px;
+  border-top: 1px solid #e8edf2;
 }
 
 .status-row {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 8px 0;
+  color: #334155;
   font-size: 13px;
-  padding: 6px 0;
-  color: #444;
+  line-height: 1.5;
 }
 
 .status-row span {
-  color: #888;
+  color: #64748b;
+  font-weight: 500;
 }
 
+.status-row strong {
+  color: #1e293b;
+  text-align: right;
+}
+
+/* ================================
+   Complete Signup Button
+================================ */
 .complete-signup-btn {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  background: #22c55e;
-  color: #fff;
-  padding: 12px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  box-sizing: border-box;
+  margin-top: 22px;
+  padding: 0 18px;
+  border-radius: 9px;
+  background: #087f73;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
-  font-weight: 600;
+  box-shadow: 0 6px 15px rgba(8, 127, 115, 0.16);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .complete-signup-btn:hover {
-  background: #16a34a;
+  background: #066b61;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px rgba(8, 127, 115, 0.2);
 }
 
+/* ================================
+   Status Note
+================================ */
 .status-note {
-  margin-top: 18px;
+  max-width: 450px;
+  margin: 18px auto 0;
+  color: #64748b;
   font-size: 13px;
-  color: #777;
+  line-height: 1.6;
   text-align: center;
 }
+
+/* ================================
+   Tablet
+================================ */
+@media (max-width: 768px) {
+  .status-container {
+    margin-top: 40px;
+  }
+
+  .status-container h2 {
+    font-size: 27px;
+  }
+
+  .status-card {
+    padding: 25px;
+  }
+}
+
+/* ================================
+   Mobile
+================================ */
+@media (max-width: 600px) {
+  .status-page {
+    padding-bottom: 40px;
+  }
+
+  .status-container {
+    margin-top: 30px;
+    padding: 0 15px;
+  }
+
+  .status-container h2 {
+    font-size: 25px;
+  }
+
+  .status-subtitle {
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  .status-form {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .status-form input,
+  .status-form button {
+    width: 100%;
+  }
+
+  .status-form button {
+    min-height: 45px;
+  }
+
+  .status-card {
+    padding: 22px 18px;
+    border-radius: 12px;
+  }
+
+  .status-card h3 {
+    font-size: 18px;
+  }
+
+  .status-row {
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .status-row span {
+    flex-shrink: 0;
+  }
+
+  .status-row strong {
+    word-break: break-word;
+  }
+}
+
+/* ================================
+   Small Mobile
+================================ */
+@media (max-width: 400px) {
+  .status-container {
+    padding: 0 12px;
+  }
+
+  .status-container h2 {
+    font-size: 23px;
+  }
+
+  .status-card {
+    padding: 20px 15px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+  }
+
+  .status-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .status-row strong {
+    text-align: left;
+  }
+
+  .complete-signup-btn {
+    min-height: 44px;
+  }
+}
+

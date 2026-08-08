@@ -1,0 +1,76 @@
+/* =========================================================
+   GLOBAL NOTIFICATION / TOAST
+   ========================================================= */
+
+.error {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  max-width: 360px;
+  min-width: 260px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid transparent;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.14),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+
+  animation: slideIn 0.3s ease;
+}
+
+/* Success Notification */
+
+.error-success {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+/* Error Notification */
+
+.error:not(.error-success) {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+/* =========================================================
+   Animation
+   ========================================================= */
+
+@keyframes slideIn {
+  from {
+    transform: translateX(calc(100% + 30px));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .error {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+    min-width: 0;
+    width: auto;
+    padding: 13px 16px;
+    font-size: 13px;
+  }
+}
