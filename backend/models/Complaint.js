@@ -26,13 +26,13 @@ const complaintSchema = new mongoose.Schema({
   },
   adminReply: {
     type : String,
-    dafault : ""
+    default : ""
   },
   studentRating: {
     type : Number , 
     min : 1,
     max: 5, 
-    dafault: null
+    default: null
   }
 
 

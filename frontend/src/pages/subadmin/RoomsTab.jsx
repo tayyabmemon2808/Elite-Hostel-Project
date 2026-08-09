@@ -5,8 +5,6 @@ import Loader from "../../components/Loader/Loader";
 import Modal from "../../components/Modal/Modal";
 import Error from "../../components/Error/Error";
 
-// Backend chahe kisi bhi field naam se students bheje (students/occupants/allottedStudents),
-// ye helper hamesha sahi array nikal ke deta hai
 const getRoomStudents = (room) => {
   return (
     room.students ||
@@ -75,7 +73,6 @@ function RoomsTab() {
     fetchData();
   }, []);
 
-  // Add Room
   const handleAddChange = (e) => {
     const { name, value } = e.target;
     if (name === "roomType" && value === "single") {
@@ -100,7 +97,6 @@ function RoomsTab() {
     }
   };
 
-  // Delete Room
   const handleDelete = async (id) => {
     setActionLoading(true);
     try {
@@ -114,7 +110,6 @@ function RoomsTab() {
     }
   };
 
-  // Edit Room
   const openEdit = (room) => {
     setEditingRoom(room);
     setEditForm({
@@ -151,7 +146,6 @@ function RoomsTab() {
     }
   };
 
-  // Allot Room
   const handleAllotChange = (e) => {
     setAllotForm({ ...allotForm, [e.target.name]: e.target.value });
   };
@@ -164,10 +158,9 @@ function RoomsTab() {
     try {
       await api.post("/rooms/allot", allotForm);
 
-      // OPTIMISTIC UPDATE: turant local state update karo, backend refetch ka wait mat karo.
-      // Isse occupied count aur dropdown filtering turant sahi ho jayenge, chahe
-      // backend ka GET /rooms/hostel response field naam kuch bhi ho.
-      const allottedStudent = students.find((s) => s._id === allotForm.studentId);
+      const allottedStudent = students.find(
+        (s) => s._id === allotForm.studentId,
+      );
 
       setRooms((prevRooms) =>
         prevRooms.map((r) => {
@@ -177,13 +170,12 @@ function RoomsTab() {
             ...r,
             students: [...currentStudents, allottedStudent],
           };
-        })
+        }),
       );
 
       setAllotForm({ roomId: "", studentId: "" });
       showTempSuccess("Student allotted successfully!");
 
-      // Background mein bhi sync kar lo (agar backend field sahi hua to aur behtar match hoga)
       fetchData();
     } catch (err) {
       showTempError(err.response?.data?.message || "Failed to allot room.");
@@ -194,13 +186,14 @@ function RoomsTab() {
 
   const formatOccupancy = (room) => getRoomStudents(room);
 
-  // Unoccupied students & available rooms
   const allottedStudentIds = new Set(
-    rooms.flatMap((r) => formatOccupancy(r).map((s) => s._id))
+    rooms.flatMap((r) => formatOccupancy(r).map((s) => s._id)),
   );
-  const unallottedStudents = students.filter((s) => !allottedStudentIds.has(s._id));
+  const unallottedStudents = students.filter(
+    (s) => !allottedStudentIds.has(s._id),
+  );
   const availableRooms = rooms.filter(
-    (r) => formatOccupancy(r).length < r.capacity
+    (r) => formatOccupancy(r).length < r.capacity,
   );
 
   if (loading) return <Loader text="Loading rooms..." />;
@@ -208,10 +201,9 @@ function RoomsTab() {
   return (
     <div>
       {actionLoading && <Loader text="Please wait..." />}
-<Error message={error} type="error" />
-<Error message={success} type="success" />
+      <Error message={error} type="error" />
+      <Error message={success} type="success" />
 
-      {/* Add Room */}
       <div className="rooms-section">
         <h3 className="tab-heading">Add Room</h3>
         <form onSubmit={handleAddSubmit} className="inline-form">
@@ -223,7 +215,11 @@ function RoomsTab() {
             onChange={handleAddChange}
             required
           />
-          <select name="roomType" value={addForm.roomType} onChange={handleAddChange}>
+          <select
+            name="roomType"
+            value={addForm.roomType}
+            onChange={handleAddChange}
+          >
             <option value="single">Single</option>
             <option value="shared">Shared</option>
           </select>
@@ -244,11 +240,15 @@ function RoomsTab() {
         </form>
       </div>
 
-      {/* Allot Room */}
       <div className="rooms-section">
         <h3 className="tab-heading">Allot Room</h3>
         <form onSubmit={handleAllotSubmit} className="inline-form">
-          <select name="studentId" value={allotForm.studentId} onChange={handleAllotChange} required>
+          <select
+            name="studentId"
+            value={allotForm.studentId}
+            onChange={handleAllotChange}
+            required
+          >
             <option value="">-- Select Student --</option>
             {unallottedStudents.map((s) => (
               <option key={s._id} value={s._id}>
@@ -256,7 +256,12 @@ function RoomsTab() {
               </option>
             ))}
           </select>
-          <select name="roomId" value={allotForm.roomId} onChange={handleAllotChange} required>
+          <select
+            name="roomId"
+            value={allotForm.roomId}
+            onChange={handleAllotChange}
+            required
+          >
             <option value="">-- Select Room --</option>
             {availableRooms.map((r) => (
               <option key={r._id} value={r._id}>
@@ -270,7 +275,6 @@ function RoomsTab() {
         </form>
       </div>
 
-      {/* Rooms List */}
       <div className="rooms-section">
         <h3 className="tab-heading">Rooms ({rooms.length})</h3>
 
@@ -288,7 +292,9 @@ function RoomsTab() {
                 <div className="room-card" key={r._id}>
                   <div className="room-card-top">
                     <h4>Room {r.roomNumber}</h4>
-                    <span className={`status-tag ${isFull ? "status-rejected" : "status-approved"}`}>
+                    <span
+                      className={`status-tag ${isFull ? "status-rejected" : "status-approved"}`}
+                    >
                       {isFull ? "Full" : "Available"}
                     </span>
                   </div>
@@ -309,7 +315,10 @@ function RoomsTab() {
                     <button className="edit-btn" onClick={() => openEdit(r)}>
                       Edit
                     </button>
-                    <button className="delete-btn" onClick={() => handleDelete(r._id)}>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(r._id)}
+                    >
                       Delete
                     </button>
                   </div>
@@ -320,9 +329,12 @@ function RoomsTab() {
         )}
       </div>
 
-      {/* Edit Modal */}
       {editingRoom && (
-        <Modal isOpen={true} onClose={() => setEditingRoom(null)} title="Edit Room">
+        <Modal
+          isOpen={true}
+          onClose={() => setEditingRoom(null)}
+          title="Edit Room"
+        >
           <form onSubmit={handleEditSubmit} className="simple-form">
             <div className="form-group">
               <label>Room Number</label>
@@ -336,7 +348,11 @@ function RoomsTab() {
             </div>
             <div className="form-group">
               <label>Room Type</label>
-              <select name="roomType" value={editForm.roomType} onChange={handleEditChange}>
+              <select
+                name="roomType"
+                value={editForm.roomType}
+                onChange={handleEditChange}
+              >
                 <option value="single">Single</option>
                 <option value="shared">Shared</option>
               </select>

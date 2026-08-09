@@ -11,7 +11,6 @@ function StudentsTab() {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Backend kisi bhi field name se students bheje
   const getRoomStudents = (room) => {
     return (
       room.studentsAllotted ||
@@ -44,7 +43,6 @@ function StudentsTab() {
 
         console.log("HOSTEL STUDENT IDS:", hostelStudentIds);
 
-        // Sirf hostel ke students show karo
         const hostelStudents = studentsRes.data.filter((student) =>
           hostelStudentIds.has(student._id)
         );

@@ -80,7 +80,6 @@ const handlePhotoUpload = async () => {
     e.preventDefault();
     setError("");
 
-    // Agar password section khula hai aur kuch type kiya hai, to match check karo
     if (showPasswordSection && passwordData.newPassword) {
       if (passwordData.newPassword.length < 6) {
         setError("Password must be at least 6 characters.");
@@ -95,7 +94,6 @@ const handlePhotoUpload = async () => {
     setLoading(true);
 
     try {
-      // Sirf wahi fields bhejo jo actually change karni hain
       const payload = {
         name: formData.name,
         email: formData.email,
@@ -107,8 +105,6 @@ const handlePhotoUpload = async () => {
       }
 
       await api.put(`/auth/update/${userId}`, payload);
-
-      // localStorage ka user object refresh karo — password kabhi store nahi hota
       const updatedUser = {
         ...user,
         name: formData.name,
@@ -151,7 +147,7 @@ const handlePhotoUpload = async () => {
   }
 };
 
-  return (
+ return (
     <Modal isOpen={true} onClose={onClose} title="Edit Profile">
       {loading && <Loader text="Updating profile..." />}
       <Error message={error} type="error" />
@@ -172,7 +168,7 @@ const handlePhotoUpload = async () => {
     )}
   </div>
 
-  <button
+  <button 
     type="button"
     className="avatar-edit-btn"
     onClick={() => fileInputRef.current.click()}
