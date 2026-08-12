@@ -1,38 +1,101 @@
 /* =========================================================
-   ELITE HOSTEL - LANDING PAGE
-   Premium / Modern / Responsive Design
-   ========================================================= */
+   ELITE HOSTELS
+   Premium Landing Page
+   Modern / Clean / Responsive
+========================================================= */
+
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --teal: #14b8a6;
+
+  --text: #172033;
+  --muted: #64748b;
+
+  --white: #ffffff;
+  --light: #f8fafc;
+  --light-blue: #eff6ff;
+
+  --border: #e2e8f0;
+
+  --shadow-sm: 0 5px 20px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 35px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 25px 60px rgba(15, 23, 42, 0.15);
+
+  --radius: 18px;
+  --transition: 0.3s ease;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  background: var(--light);
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
 .landing-page {
   width: 100%;
   min-height: 100vh;
-  background: #ffffff;
-  color: #172b4d;
+  overflow-x: hidden;
+  background: var(--white);
 }
 
 /* =========================================================
-   HERO SECTION
-   ========================================================= */
+   HERO
+========================================================= */
 
 .hero {
   position: relative;
 
-  min-height: 520px;
+  min-height: 720px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 100px 24px;
+  padding: 120px 24px 100px;
 
   text-align: center;
 
   background:
-    url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1600")
+    url("https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1800&q=85")
     center / cover no-repeat;
 
   overflow: hidden;
 }
+
+/* Dark premium overlay */
 
 .hero::before {
   content: "";
@@ -43,10 +106,37 @@
   background:
     linear-gradient(
       135deg,
-      rgba(15, 35, 60, 0.88),
-      rgba(30, 58, 95, 0.68),
-      rgba(13, 148, 136, 0.32)
+      rgba(2, 6, 23, 0.92) 0%,
+      rgba(15, 23, 42, 0.82) 45%,
+      rgba(30, 64, 175, 0.68) 100%
     );
+
+  z-index: 0;
+}
+
+/* Decorative gradient */
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  right: -180px;
+  top: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(20, 184, 166, 0.28),
+      transparent 68%
+    );
+
+  filter: blur(10px);
 
   z-index: 0;
 }
@@ -55,14 +145,11 @@
   position: absolute;
   inset: 0;
 
-  width: 100%;
-  height: 100%;
-
   background:
     radial-gradient(
-      circle at 75% 25%,
-      rgba(37, 99, 235, 0.2),
-      transparent 40%
+      circle at 20% 80%,
+      rgba(37, 99, 235, 0.25),
+      transparent 35%
     );
 
   z-index: 0;
@@ -71,139 +158,276 @@
 .hero-content {
   position: relative;
 
-  z-index: 1;
+  z-index: 2;
 
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
 
-  color: #ffffff;
+  color: var(--white);
 
-  animation: heroFadeIn 0.8s ease-out;
+  animation: heroAppear 0.9s ease-out;
 }
 
-.hero-content h1 {
-  max-width: 760px;
+/* Small heading */
 
-  margin: 0 auto 20px;
+.hero-content::before {
+  content: "WELCOME TO ELITE HOSTELS";
 
-  color: #ffffff;
+  display: inline-block;
 
-  font-size: clamp(36px, 5vw, 58px);
+  margin-bottom: 20px;
+
+  padding: 8px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  color: #93c5fd;
+
+  font-size: 11px;
   font-weight: 800;
 
-  line-height: 1.1;
-  letter-spacing: -1.2px;
+  letter-spacing: 2px;
 }
+
+/* Hero title */
+
+.hero-content h1 {
+  max-width: 850px;
+
+  margin: 0 auto 25px;
+
+  color: #ffffff;
+
+  font-size: clamp(42px, 7vw, 76px);
+
+  font-weight: 900;
+
+  line-height: 1.02;
+
+  letter-spacing: -3px;
+
+  text-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Hero paragraph */
 
 .hero-content p {
-  max-width: 620px;
+  max-width: 680px;
 
-  margin: 0 auto 32px;
+  margin: 0 auto 38px;
 
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.86);
 
   font-size: 17px;
-  line-height: 1.7;
+
+  line-height: 1.8;
 }
 
+/* Hero button */
+
 .hero-btn {
+  position: relative;
+
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
-  min-width: 150px;
+  min-width: 165px;
 
-  padding: 13px 28px;
+  padding: 15px 30px;
 
-  background: #ffffff;
-  color: #1e3a5f;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 
-  border: 2px solid #ffffff;
-  border-radius: 9px;
+  border-radius: 12px;
 
-  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f1f5f9
+  );
+
+  color: #1e3a8a;
 
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
 
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.22);
 
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: all var(--transition);
+
+  overflow: hidden;
+}
+
+.hero-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.65),
+      transparent
+    );
+
+  transition: 0.6s;
+}
+
+.hero-btn:hover::before {
+  left: 100%;
 }
 
 .hero-btn:hover {
-  background: #1e3a5f;
+  transform: translateY(-5px) scale(1.02);
+
+  background: var(--primary);
+
   color: #ffffff;
 
-  transform: translateY(-3px);
+  border-color: var(--primary);
 
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 18px 40px rgba(37, 99, 235, 0.35);
 }
 
 /* =========================================================
    HOSTELS SECTION
-   ========================================================= */
+========================================================= */
 
 .hostels-section {
-  padding: 90px 40px;
+  position: relative;
 
-  background: #ffffff;
+  padding: 110px 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
 
   text-align: center;
 
   scroll-margin-top: 80px;
 }
 
-.hostels-section h2 {
-  margin: 0 0 10px;
+.hostels-section::before {
+  content: "";
 
-  color: #172b4d;
+  position: absolute;
 
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: 800;
+  width: 280px;
+  height: 280px;
 
-  letter-spacing: -0.5px;
+  top: 20px;
+  left: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(37, 99, 235, 0.05);
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+.hostels-section h2,
+.reviews-section h2 {
+  position: relative;
+
+  margin: 0 0 12px;
+
+  color: var(--navy);
+
+  font-size: clamp(30px, 4vw, 42px);
+
+  font-weight: 900;
+
+  letter-spacing: -1.5px;
+}
+
+/* Small blue line */
+
+.hostels-section h2::after,
+.reviews-section h2::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 4px;
+
+  margin: 15px auto 0;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--primary),
+      var(--teal)
+    );
 }
 
 .section-subtitle {
-  max-width: 600px;
+  max-width: 650px;
 
-  margin: 0 auto 45px;
+  margin: 22px auto 55px;
 
-  color: #64748b;
+  color: var(--muted);
 
   font-size: 15px;
-  line-height: 1.7;
+
+  line-height: 1.8;
 }
 
 .no-hostels {
   padding: 50px 20px;
 
-  color: #94a3b8;
+  border: 1px dashed var(--border);
+
+  border-radius: var(--radius);
+
+  background: var(--white);
+
+  color: var(--muted);
 
   font-size: 14px;
 }
 
 /* =========================================================
-   HOSTEL GRID
-   ========================================================= */
+   HOSTELS GRID
+========================================================= */
 
 .hostels-grid {
   display: grid;
 
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(270px, 1fr)
-  );
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    );
 
-  gap: 26px;
+  gap: 28px;
 
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
 
   margin: 0 auto;
 
@@ -212,230 +436,279 @@
 
 /* =========================================================
    HOSTEL CARD
-   ========================================================= */
+========================================================= */
 
 .hostel-card {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
   background: #ffffff;
 
-  border: 1px solid #e5eaf0;
-  border-radius: 14px;
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
 
   overflow: hidden;
 
-  box-shadow:
-    0 5px 18px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
 }
 
 .hostel-card:hover {
-  transform: translateY(-7px);
+  transform: translateY(-10px);
 
-  border-color: #d6e2f0;
+  border-color: rgba(37, 99, 235, 0.25);
 
-  box-shadow:
-    0 15px 35px rgba(15, 23, 42, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 /* =========================================================
    HOSTEL IMAGE
-   ========================================================= */
+========================================================= */
 
 .hostel-card-img {
   display: block;
 
   width: 100%;
-  height: 205px;
+  height: 230px;
 
   object-fit: cover;
 
-  transition: transform 0.4s ease;
+  background: #e2e8f0;
+
+  transition:
+    transform 0.6s ease;
 }
 
 .hostel-card:hover .hostel-card-img {
-  transform: scale(1.035);
+  transform: scale(1.07);
 }
 
-/* =========================================================
-   HOSTEL CARD BODY
-   ========================================================= */
+/* Image wrapper effect using overflow card */
 
 .hostel-card-body {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
   flex: 1;
 
-  padding: 21px;
+  padding: 25px;
 }
 
+/* =========================================================
+   HOSTEL INFO
+========================================================= */
+
 .hostel-card-body h3 {
-  margin: 0 0 7px;
+  margin: 0 0 8px;
 
-  color: #172b4d;
+  color: var(--navy);
 
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 20px;
 
-  line-height: 1.4;
+  font-weight: 800;
+
+  line-height: 1.35;
 }
 
 .hostel-city {
-  margin: 0 0 13px;
+  display: flex;
+  align-items: center;
 
-  color: #64748b;
+  gap: 5px;
+
+  margin: 0 0 17px;
+
+  color: var(--muted);
 
   font-size: 13px;
 }
 
-.hostel-price {
-  margin: 0 0 18px;
+.hostel-city::before {
+  content: "📍";
 
-  color: #2563eb;
+  font-size: 12px;
+}
+
+.hostel-price {
+  display: inline-block;
+
+  margin: 0 0 22px;
+
+  color: var(--primary);
 
   font-size: 15px;
-  font-weight: 700;
+
+  font-weight: 800;
 }
 
 /* =========================================================
-   HOSTEL VIEW BUTTON
-   ========================================================= */
+   VIEW DETAILS BUTTON
+========================================================= */
 
 .hostel-view-btn {
-  display: inline-flex;
+  display: flex;
+
   align-items: center;
   justify-content: center;
 
   width: 100%;
 
-  box-sizing: border-box;
-
   margin-top: auto;
 
-  padding: 10px 18px;
+  padding: 12px 18px;
 
-  background: #1e3a5f;
+  border: 1px solid var(--primary);
+
+  border-radius: 10px;
+
+  background: var(--primary);
+
   color: #ffffff;
 
-  border: 1px solid #1e3a5f;
-  border-radius: 8px;
-
-  text-decoration: none;
-
   font-size: 13px;
-  font-weight: 600;
 
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  font-weight: 700;
+
+  transition: all var(--transition);
 }
 
 .hostel-view-btn:hover {
-  background: #16304d;
+  background: var(--primary-dark);
 
-  transform: translateY(-1px);
+  border-color: var(--primary-dark);
+
+  transform: translateY(-2px);
 
   box-shadow:
-    0 5px 12px rgba(30, 58, 95, 0.2);
+    0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
 /* =========================================================
-   REVIEWS SECTION
-   ========================================================= */
+   REVIEWS
+========================================================= */
 
 .reviews-section {
-  padding: 90px 40px;
+  position: relative;
 
-  background: #f7f9fc;
+  padding: 110px 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff 0%,
+      #f8fafc 50%,
+      #ecfeff 100%
+    );
 
   text-align: center;
 
   scroll-margin-top: 80px;
+
+  overflow: hidden;
 }
 
-.reviews-section h2 {
-  margin: 0 0 42px;
+.reviews-section::before {
+  content: "";
 
-  color: #172b4d;
+  position: absolute;
 
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: 800;
+  width: 400px;
+  height: 400px;
 
-  letter-spacing: -0.5px;
+  left: -200px;
+  bottom: -200px;
+
+  border-radius: 50%;
+
+  background: rgba(20, 184, 166, 0.08);
+
+  filter: blur(20px);
 }
 
 /* =========================================================
    REVIEWS GRID
-   ========================================================= */
+========================================================= */
 
 .reviews-grid {
+  position: relative;
+  z-index: 1;
+
   display: grid;
 
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(260px, 1fr)
-  );
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    );
 
-  gap: 22px;
+  gap: 25px;
 
   width: 100%;
-  max-width: 1050px;
+  max-width: 1150px;
 
-  margin: 0 auto;
+  margin: 55px auto 0;
 
   text-align: left;
 }
 
 /* =========================================================
    REVIEW CARD
-   ========================================================= */
+========================================================= */
 
 .review-card {
   position: relative;
 
-  background: #ffffff;
+  padding: 32px;
 
-  padding: 26px;
+  background: rgba(255, 255, 255, 0.9);
 
-  border: 1px solid #e5eaf0;
-  border-radius: 13px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
 
-  box-shadow:
-    0 5px 18px rgba(15, 23, 42, 0.05);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow-sm);
+
+  backdrop-filter: blur(10px);
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    transform var(--transition),
+    box-shadow var(--transition);
 }
+
+.review-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* Quote */
 
 .review-card::before {
   content: "“";
 
   position: absolute;
 
-  top: 12px;
-  right: 20px;
+  top: 15px;
+  right: 25px;
 
   color: #dbeafe;
 
-  font-size: 52px;
-  font-weight: 800;
+  font-family: Georgia, serif;
+
+  font-size: 70px;
+
+  font-weight: 900;
 
   line-height: 1;
-}
-
-.review-card:hover {
-  transform: translateY(-4px);
-
-  box-shadow:
-    0 12px 28px rgba(15, 23, 42, 0.09);
 }
 
 .review-text {
@@ -443,287 +716,353 @@
 
   z-index: 1;
 
-  margin: 0 0 17px;
+  margin: 0 0 25px;
 
   color: #475569;
 
   font-size: 14px;
-  line-height: 1.75;
+
+  line-height: 1.85;
 }
 
 .review-author {
   margin: 0;
 
-  color: #1e3a5f;
+  color: var(--navy);
 
   font-size: 13px;
-  font-weight: 700;
+
+  font-weight: 800;
 }
 
 /* =========================================================
    FOOTER
-   ========================================================= */
+========================================================= */
 
 .footer {
-  margin-top: 0;
+  position: relative;
 
-  padding: 65px 30px 25px;
+  padding: 75px 30px 25px;
 
   background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(37, 99, 235, 0.2),
+      transparent 30%
+    ),
     linear-gradient(
       135deg,
-      #142b47,
-      #1e3a5f
+      #020617,
+      #0f172a 60%,
+      #172554
     );
 
   color: #ffffff;
 
   text-align: center;
+
+  overflow: hidden;
 }
 
 .footer-content {
-  display: flex;
+  display: grid;
 
-  justify-content: space-between;
+  grid-template-columns:
+    1.3fr 1fr 1fr;
 
-  max-width: 1100px;
+  gap: 60px;
+
+  width: 100%;
+  max-width: 1150px;
 
   margin: 0 auto;
 
-  gap: 40px;
-
   text-align: left;
-
-  flex-wrap: wrap;
 }
 
 .footer-section {
-  flex: 1;
-
-  min-width: 220px;
+  min-width: 0;
 }
 
 .footer-section h3 {
-  margin: 0 0 15px;
+  margin: 0 0 16px;
 
   color: #ffffff;
 
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+
+  font-weight: 800;
+}
+
+.footer-section:first-child h3 {
+  font-size: 24px;
+
+  letter-spacing: -0.5px;
 }
 
 .footer-section p {
   margin: 8px 0;
 
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.65);
 
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
+
+  line-height: 1.8;
 }
 
-.footer h3 {
-  color: #ffffff;
+.footer a {
+  color: rgba(255, 255, 255, 0.65);
 
-  font-size: 24px;
-  font-weight: 800;
-
-  letter-spacing: 0.3px;
-
-  margin-bottom: 12px;
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
 }
 
-.footer p {
-  margin: 8px 0;
+.footer a:hover {
+  color: #5eead4;
 
-  color: rgba(255, 255, 255, 0.82);
-
-  font-size: 14px;
-  line-height: 1.7;
+  padding-left: 4px;
 }
 
-.footer p:last-child {
-  margin-top: 30px;
-  padding-top: 20px;
+.footer hr {
+  width: 100%;
+  max-width: 1150px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  margin: 50px auto 22px;
 
-  color: rgba(255, 255, 255, 0.55);
+  border: 0;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer > p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.4);
 
   font-size: 12px;
 }
 
-.footer a {
-  color: #5eead4;
-
-  text-decoration: none;
-
-  transition:
-    color 0.2s ease;
-}
-
-.footer a:hover {
-  color: #ffffff;
-}
-
-.footer hr {
-  max-width: 1100px;
-
-  margin: 30px auto 0;
-
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-}
-
 /* =========================================================
-   ANIMATION
-   ========================================================= */
+   ANIMATIONS
+========================================================= */
 
-@keyframes heroFadeIn {
+@keyframes heroAppear {
   from {
     opacity: 0;
-    transform: translateY(15px);
+
+    transform:
+      translateY(25px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
 /* =========================================================
    TABLET
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 900px) {
   .hero {
-    min-height: 480px;
-    padding: 90px 25px;
+    min-height: 650px;
+
+    padding: 110px 25px 80px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(
+      40px,
+      7vw,
+      60px
+    );
   }
 
   .hostels-section,
   .reviews-section {
-    padding: 75px 25px;
+    padding: 85px 25px;
   }
 
-  .hostels-grid {
-    gap: 20px;
+  .footer-content {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 40px;
   }
 
-  .reviews-grid {
-    gap: 18px;
-  }
-
-  .footer {
-    padding: 55px 25px 25px;
+  .footer-section:first-child {
+    grid-column: 1 / -1;
   }
 }
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 600px) {
   .hero {
-    min-height: 500px;
+    min-height: 620px;
 
-    padding: 80px 20px;
+    padding: 100px 20px 70px;
+  }
+
+  .hero-content::before {
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    padding: 7px 12px;
+
+    margin-bottom: 18px;
   }
 
   .hero-content h1 {
-    font-size: 36px;
-    letter-spacing: -0.7px;
+    font-size: 40px;
+
+    line-height: 1.08;
+
+    letter-spacing: -1.7px;
+
+    margin-bottom: 20px;
   }
 
   .hero-content p {
     font-size: 14px;
-    line-height: 1.65;
 
-    margin-bottom: 27px;
+    line-height: 1.7;
+
+    margin-bottom: 30px;
   }
 
   .hero-btn {
     width: 100%;
-    max-width: 220px;
 
-    padding: 12px 22px;
+    max-width: 230px;
+
+    padding: 14px 22px;
   }
 
   .hostels-section,
   .reviews-section {
-    padding: 65px 18px;
+    padding: 75px 18px;
   }
 
   .hostels-section h2,
   .reviews-section h2 {
-    font-size: 28px;
+    font-size: 30px;
+
+    letter-spacing: -0.8px;
   }
 
   .section-subtitle {
     font-size: 14px;
-    margin-bottom: 32px;
+
+    margin-bottom: 38px;
   }
 
   .hostels-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+
+    gap: 20px;
   }
 
   .hostel-card-img {
-    height: 210px;
+    height: 220px;
+  }
+
+  .hostel-card-body {
+    padding: 22px;
+  }
+
+  .hostel-card-body h3 {
+    font-size: 18px;
   }
 
   .reviews-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+
+    gap: 18px;
+
+    margin-top: 40px;
   }
 
   .review-card {
-    padding: 22px;
+    padding: 27px 23px;
   }
 
   .footer {
-    padding: 50px 20px 22px;
+    padding: 60px 20px 22px;
   }
 
   .footer-content {
-    flex-direction: column;
+    grid-template-columns: 1fr;
 
-    gap: 25px;
+    gap: 32px;
 
     text-align: center;
   }
 
-  .footer-section {
-    min-width: 100%;
+  .footer-section:first-child {
+    grid-column: auto;
   }
 
-  .footer h3 {
-    font-size: 21px;
+  .footer-section:first-child h3 {
+    font-size: 23px;
   }
 
-  .footer p {
-    font-size: 13px;
+  .footer hr {
+    margin-top: 40px;
   }
 }
 
 /* =========================================================
    SMALL MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 380px) {
   .hero {
-    min-height: 470px;
+    min-height: 590px;
   }
 
   .hero-content h1 {
-    font-size: 32px;
+    font-size: 34px;
+
+    letter-spacing: -1.2px;
   }
 
   .hero-content p {
     font-size: 13px;
   }
 
+  .hostels-section h2,
+  .reviews-section h2 {
+    font-size: 27px;
+  }
+
   .hostel-card-img {
-    height: 190px;
+    height: 200px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
   }
 }
