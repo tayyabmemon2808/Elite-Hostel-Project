@@ -297,18 +297,7 @@ const HostelsTab = () => {
               <p className="assigned-subadmin">
                 Sub-admin: {getAssignedSubAdminName(hostel._id) || "Not assigned"}
               </p>
-
-              <select
-                value={getAssignedSubAdminId(hostel._id) || ""}
-                onChange={(e) => handleAssignSubAdmin(hostel._id, e.target.value)}
-              >
-                <option value="">Select Sub Admin</option>
-                {getAvailableSubAdmins(hostel._id).map((sa) => (
-                  <option key={sa._id} value={sa._id}>
-                    {sa.name}
-                  </option>
-                ))}
-              </select>
+              
 
               <div className="hostel-image-upload">
                 <input

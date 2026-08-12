@@ -67,41 +67,65 @@ function BookingRequests() {
         <>
           {pendingBookings.length > 0 && (
             <div className="booking-group">
-              <h4 className="group-title">Pending ({pendingBookings.length})</h4>
+              <h4 className="group-title">
+                Pending ({pendingBookings.length})
+              </h4>
               <div className="booking-list">
                 {pendingBookings.map((b) => (
-                 <div className="booking-card" key={b._id}>
-  <div className="booking-card-top">
-    <div>
-      <h4>{b.name}</h4>
-      <p className="booking-ref">{b.referenceId}</p>
-    </div>
-    <span className="status-tag status-pending">pending</span>
-  </div>
+                  <div className="booking-card" key={b._id}>
+                    <div className="booking-card-top">
+                      <div>
+                        <h4>{b.name}</h4>
+                        <p className="booking-ref">{b.referenceId}</p>
+                      </div>
+                      <span className="status-tag status-pending">pending</span>
+                    </div>
 
-  <div className="payment-info-box">
-    <span className="payment-label">Payment via {b.paymentMethod}</span>
-    <span className="payment-ref">Ref: {b.paymentReference}</span>
-  </div>
+                    <div className="payment-info-box">
+                      <span className="payment-label">
+                        Payment via {b.paymentMethod}
+                      </span>
+                      <span className="payment-ref">
+                        Ref: {b.paymentReference}
+                      </span>
+                    </div>
 
-  <div className="booking-details-grid">
-    <p><span>Email:</span> {b.email}</p>
-    <p><span>Phone:</span> {b.phone}</p>
-    <p><span>Room Type:</span> {b.roomType}</p>
-    <p><span>Price:</span> Rs. {b.calculatedPrice}</p>
-    <p><span>Check-in:</span> {formatDate(b.checkInDate)}</p>
-    <p><span>Check-out:</span> {formatDate(b.checkOutDate)}</p>
-  </div>
+                    <div className="booking-details-grid">
+                      <p>
+                        <span>Email:</span> {b.email}
+                      </p>
+                      <p>
+                        <span>Phone:</span> {b.phone}
+                      </p>
+                      <p>
+                        <span>Room Type:</span> {b.roomType}
+                      </p>
+                      <p>
+                        <span>Price:</span> Rs. {b.calculatedPrice}
+                      </p>
+                      <p>
+                        <span>Check-in:</span> {formatDate(b.checkInDate)}
+                      </p>
+                      <p>
+                        <span>Check-out:</span> {formatDate(b.checkOutDate)}
+                      </p>
+                    </div>
 
-  <div className="booking-actions">
-    <button className="approve-btn" onClick={() => handleStatusUpdate(b._id, "approved")}>
-      Approve
-    </button>
-    <button className="reject-btn" onClick={() => handleStatusUpdate(b._id, "rejected")}>
-      Reject
-    </button>
-  </div>
-</div>
+                    <div className="booking-actions">
+                      <button
+                        className="approve-btn"
+                        onClick={() => handleStatusUpdate(b._id, "approved")}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="reject-btn"
+                        onClick={() => handleStatusUpdate(b._id, "rejected")}
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -118,13 +142,21 @@ function BookingRequests() {
                         <h4>{b.name}</h4>
                         <p className="booking-ref">{b.referenceId}</p>
                       </div>
-                      <span className={`status-tag status-${b.status}`}>{b.status}</span>
+                      <span className={`status-tag status-${b.status}`}>
+                        {b.status}
+                      </span>
                     </div>
-                   <div className="booking-details-grid">
-  <p><span>Room Type:</span> {b.roomType}</p>
-  <p><span>Price:</span> Rs. {b.calculatedPrice}</p>
-  <p><span>Payment Ref:</span> {b.paymentReference}</p>
-</div>
+                    <div className="booking-details-grid">
+                      <p>
+                        <span>Room Type:</span> {b.roomType}
+                      </p>
+                      <p>
+                        <span>Price:</span> Rs. {b.calculatedPrice}
+                      </p>
+                      <p>
+                        <span>Payment Ref:</span> {b.paymentReference}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>

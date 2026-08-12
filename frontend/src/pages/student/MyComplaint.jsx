@@ -10,8 +10,7 @@ function MyComplaints() {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
-const [selectedRatings, setSelectedRatings] = useState({});
-
+  const [selectedRatings, setSelectedRatings] = useState({});
 
   const fetchComplaints = async () => {
     setLoading(true);
@@ -41,24 +40,24 @@ const [selectedRatings, setSelectedRatings] = useState({});
     }
   };
 
- const handleRate = async (id) => {
-  const rating = selectedRatings[id];
-  if (!rating) return;
+  const handleRate = async (id) => {
+    const rating = selectedRatings[id];
+    if (!rating) return;
 
-  setActionLoading(true);
-  try {
-    await api.put(`/complaints/rate/${id}`, { studentRating: rating });
-    await fetchComplaints();
-  } catch (err) {
-    console.error("Failed to rate:", err);
-  } finally {
-    setActionLoading(false);
-  }
-};
+    setActionLoading(true);
+    try {
+      await api.put(`/complaints/rate/${id}`, { studentRating: rating });
+      await fetchComplaints();
+    } catch (err) {
+      console.error("Failed to rate:", err);
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
-const handleStarClick = (id, star) => {
-  setSelectedRatings({ ...selectedRatings, [id]: star });
-};
+  const handleStarClick = (id, star) => {
+    setSelectedRatings({ ...selectedRatings, [id]: star });
+  };
 
   if (loading) return <Loader text="Loading complaints..." />;
 
@@ -78,7 +77,9 @@ const handleStarClick = (id, star) => {
             <div className="complaint-card" key={c._id}>
               <div className="complaint-top">
                 <h4>{c.title}</h4>
-                <span className={`status-tag status-${c.status}`}>{c.status}</span>
+                <span className={`status-tag status-${c.status}`}>
+                  {c.status}
+                </span>
               </div>
               <p className="complaint-desc">{c.description}</p>
 
@@ -89,31 +90,35 @@ const handleStarClick = (id, star) => {
 
                   <div className="complaint-actions">
                     {!c.studentRating ? (
-  <div className="rating-input">
-    <span>Rate this resolution:</span>
-    <div className="stars-row">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <button
-          key={star}
-          className="star-btn"
-          onClick={() => handleStarClick(c._id, star)}
-        >
-          {(selectedRatings[c._id] || 0) >= star ? "★" : "☆"}
-        </button>
-      ))}
-    </div>
-    {selectedRatings[c._id] && (
-      <button
-        className="confirm-rating-btn"
-        onClick={() => handleRate(c._id)}
-      >
-        Submit Rating
-      </button>
-    )}
-  </div>
-) : (
-  <p className="rated-text">You rated: {c.studentRating} ★</p>
-)}
+                      <div className="rating-input">
+                        <span>Rate this resolution:</span>
+                        <div className="stars-row">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <button
+                              key={star}
+                              className="star-btn"
+                              onClick={() => handleStarClick(c._id, star)}
+                            >
+                              {(selectedRatings[c._id] || 0) >= star
+                                ? "★"
+                                : "☆"}
+                            </button>
+                          ))}
+                        </div>
+                        {selectedRatings[c._id] && (
+                          <button
+                            className="confirm-rating-btn"
+                            onClick={() => handleRate(c._id)}
+                          >
+                            Submit Rating
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="rated-text">
+                        You rated: {c.studentRating} ★
+                      </p>
+                    )}
 
                     <button
                       className="reopen-btn"
