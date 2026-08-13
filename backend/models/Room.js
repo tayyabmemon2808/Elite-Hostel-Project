@@ -4,8 +4,7 @@ const roomSchema = new mongoose.Schema(
     {
         roomNumber: {
             type: String,
-            required: true,
-            unique: true
+            required: true
         },
         hostel: {
             type: mongoose.Schema.Types.ObjectId,

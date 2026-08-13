@@ -5,9 +5,9 @@ const addRoom = async (req, res) => {
   try {
     const { roomNumber, hostel, roomType, capacity } = req.body;
 
-    const existingRoom = await Room.findOne({ roomNumber });
+    const existingRoom = await Room.findOne({ roomNumber, hostel });
     if (existingRoom) {
-      return res.status(400).json({ message: 'Room already exists' });
+      return res.status(400).json({ message: 'Room number already exists in this hostel' });
     }
 
     const newRoom = new Room({ roomNumber, hostel, roomType, capacity });
@@ -86,6 +86,16 @@ const updateRoom = async (req, res) => {
       return res.status(404).json({ message: 'Room not found' });
     }
 
+    const duplicateRoom = await Room.findOne({
+      roomNumber,
+      hostel,
+      _id: { $ne: id }
+    });
+
+    if (duplicateRoom) {
+      return res.status(400).json({ message: 'Room number already exists in this hostel' });
+    }
+
     if (capacity < room.studentsAllotted.length) {
       return res.status(400).json({ message: 'Capacity cannot be less than students already allotted' });
     }
@@ -102,7 +112,6 @@ const updateRoom = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-
 const deleteRoom = async (req, res) => {
   try {
     const { id } = req.params;
