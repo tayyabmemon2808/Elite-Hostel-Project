@@ -4,6 +4,8 @@ import Modal from "../../components/Modal/Modal";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
 import { getImageUrl } from "../../utils/imageUrl";
+import { FiImage } from "react-icons/fi";
+import { FiCamera } from "react-icons/fi";
 
 const emptyForm = {
   name: "",
@@ -62,36 +64,36 @@ const HostelsTab = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
- const handleAddHostel = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setLoaderText("Adding hostel...");
-  try {
-    const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("city", form.city);
-    formData.append("address", form.address);
-    formData.append("description", form.description);
-    formData.append("singleRoomPrice", Number(form.singleRoomPrice));
-    formData.append("sharedRoomPrice", Number(form.sharedRoomPrice));
+  const handleAddHostel = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setLoaderText("Adding hostel...");
+    try {
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("city", form.city);
+      formData.append("address", form.address);
+      formData.append("description", form.description);
+      formData.append("singleRoomPrice", Number(form.singleRoomPrice));
+      formData.append("sharedRoomPrice", Number(form.sharedRoomPrice));
 
-    imageInputFiles.forEach((file) => {
-      formData.append("images", file);
-    });
+      imageInputFiles.forEach((file) => {
+        formData.append("images", file);
+      });
 
-    await api.post("/hostels/add", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    showToast("Hostel added successfully");
-    setForm(emptyForm);
-    setImageInputFiles([]);
-    fetchHostels();
-  } catch (err) {
-    showToast(err.response?.data?.message || "Failed to add hostel", "error");
-  } finally {
-    setLoading(false);
-  }
-};
+      await api.post("/hostels/add", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      showToast("Hostel added successfully");
+      setForm(emptyForm);
+      setImageInputFiles([]);
+      fetchHostels();
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to add hostel", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const openEditModal = (hostel) => {
     setEditHostel(hostel);
@@ -130,7 +132,10 @@ const HostelsTab = () => {
       setEditModalOpen(false);
       fetchHostels();
     } catch (err) {
-      showToast(err.response?.data?.message || "Failed to update hostel", "error");
+      showToast(
+        err.response?.data?.message || "Failed to update hostel",
+        "error",
+      );
     } finally {
       setLoading(false);
     }
@@ -145,7 +150,10 @@ const HostelsTab = () => {
       showToast("Hostel deleted successfully");
       fetchHostels();
     } catch (err) {
-      showToast(err.response?.data?.message || "Failed to delete hostel", "error");
+      showToast(
+        err.response?.data?.message || "Failed to delete hostel",
+        "error",
+      );
     } finally {
       setLoading(false);
     }
@@ -160,7 +168,10 @@ const HostelsTab = () => {
       fetchHostels();
       fetchSubAdmins();
     } catch (err) {
-      showToast(err.response?.data?.message || "Failed to assign sub-admin", "error");
+      showToast(
+        err.response?.data?.message || "Failed to assign sub-admin",
+        "error",
+      );
     } finally {
       setLoading(false);
     }
@@ -168,7 +179,8 @@ const HostelsTab = () => {
 
   const getAvailableSubAdmins = (hostelId) => {
     return subAdmins.filter(
-      (sa) => !sa.hostel || sa.hostel === hostelId || sa.hostel?._id === hostelId
+      (sa) =>
+        !sa.hostel || sa.hostel === hostelId || sa.hostel?._id === hostelId,
     );
   };
 
@@ -256,12 +268,12 @@ const HostelsTab = () => {
           onChange={handleChange}
           required
         />
-       <input
-  type="file"
-  accept="image/*"
-  multiple
-  onChange={(e) => setImageInputFiles(Array.from(e.target.files))}
-/>
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={(e) => setImageInputFiles(Array.from(e.target.files))}
+        />
         <button type="submit" className="form-submit-btn">
           Add Hostel
         </button>
@@ -274,18 +286,18 @@ const HostelsTab = () => {
         <div className="hostels-grid">
           {hostels.map((hostel) => (
             <div className="hostel-admin-card" key={hostel._id}>
-               {hostel.images?.length > 0 && (
-    <div className="hostel-admin-images">
-      {hostel.images.map((img, idx) => (
-        <img
-          key={idx}
-          src={getImageUrl(img)}
-          alt={`${hostel.name}-${idx}`}
-          className="hostel-admin-thumb"
-        />
-      ))}
-    </div>
-  )} 
+              {hostel.images?.length > 0 && (
+                <div className="hostel-admin-images">
+                  {hostel.images.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={getImageUrl(img)}
+                      alt={`${hostel.name}-${idx}`}
+                      className="hostel-admin-thumb"
+                    />
+                  ))}
+                </div>
+              )}
               <h4>{hostel.name}</h4>
               <p>{hostel.city}</p>
               <p className="hostel-address">{hostel.address}</p>
@@ -295,21 +307,71 @@ const HostelsTab = () => {
               </p>
 
               <p className="assigned-subadmin">
-                Sub-admin: {getAssignedSubAdminName(hostel._id) || "Not assigned"}
+                Sub-admin:{" "}
+                {getAssignedSubAdminName(hostel._id) || "Not assigned"}
               </p>
-              
 
               <div className="hostel-image-upload">
                 <input
+                  id={`hostel-image-${hostel._id}`}
                   type="file"
                   accept="image/*"
-                  onChange={(e) =>
-                    setImageFiles({ ...imageFiles, [hostel._id]: e.target.files[0] })
-                  }
+                  hidden
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
+                    if (file) {
+                      setImageFiles({
+                        ...imageFiles,
+                        [hostel._id]: file,
+                      });
+                    }
+                  }}
                 />
-                <button onClick={() => handleHostelImageUpload(hostel._id)}>
-                  Upload Image
-                </button>
+
+                {imageFiles[hostel._id] ? (
+                  <>
+                    <div className="selected-image-preview">
+                      <img
+                        src={URL.createObjectURL(imageFiles[hostel._id])}
+                        alt="Selected"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="cancel-image-btn"
+                      onClick={() => {
+                        setImageFiles({
+                          ...imageFiles,
+                          [hostel._id]: null,
+                        });
+
+                        // File input bhi reset
+                        document.getElementById(
+                          `hostel-image-${hostel._id}`,
+                        ).value = "";
+                      }}
+                      title="Remove selected image"
+                    >
+                      ✕
+                    </button>
+                    <button
+                      type="button"
+                      className="image-upload-submit"
+                      onClick={() => handleHostelImageUpload(hostel._id)}
+                    >
+                      Upload
+                    </button>
+                  </>
+                ) : (
+                  <label
+                    htmlFor={`hostel-image-${hostel._id}`}
+                    className="image-upload-icon"
+                    title="Select Image"
+                  >
+                    📷
+                  </label>
+                )}
               </div>
 
               <div className="hostel-card-actions">
