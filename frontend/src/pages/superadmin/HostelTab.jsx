@@ -4,8 +4,7 @@ import Modal from "../../components/Modal/Modal";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
 import { getImageUrl } from "../../utils/imageUrl";
-import { FiImage } from "react-icons/fi";
-import { FiCamera } from "react-icons/fi";
+import { FiImage, FiCamera, FiX } from "react-icons/fi";
 
 const emptyForm = {
   name: "",
@@ -269,11 +268,23 @@ const HostelsTab = () => {
           required
         />
         <input
+          id="add-hostel-images"
           type="file"
           accept="image/*"
           multiple
+          hidden
+          style={{display: "none"}}
           onChange={(e) => setImageInputFiles(Array.from(e.target.files))}
         />
+        <label htmlFor="add-hostel-images" className="choose-image-btn">
+          <span>
+            {imageInputFiles.length > 0
+              ? `${imageInputFiles.length} image(s) selected`
+              :  ""}
+              Select Image {" "}
+                <FiCamera size={18} />
+          </span>
+        </label>
         <button type="submit" className="form-submit-btn">
           Add Hostel
         </button>
@@ -345,8 +356,6 @@ const HostelsTab = () => {
                           ...imageFiles,
                           [hostel._id]: null,
                         });
-
-                        // File input bhi reset
                         document.getElementById(
                           `hostel-image-${hostel._id}`,
                         ).value = "";
@@ -369,7 +378,7 @@ const HostelsTab = () => {
                     className="image-upload-icon"
                     title="Select Image"
                   >
-                    📷
+                    <FiCamera size={20} />
                   </label>
                 )}
               </div>

@@ -58,8 +58,24 @@ function BookingForm() {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { name, value } = e.target;
+
+  if (name === "phone") {
+    const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+
+    setFormData({
+      ...formData,
+      phone: digitsOnly,
+    });
+
+    return;
+  }
+
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
 
   const calculateEstimatedPrice = () => {
     if (!selectedHostel || !formData.checkInDate || !formData.checkOutDate) {
@@ -91,29 +107,27 @@ function BookingForm() {
 
   const estimatedPrice = calculateEstimatedPrice();
 
-    const getDateError = () => {
-  if (!formData.checkInDate || !formData.checkOutDate) return "";
-  const checkIn = new Date(formData.checkInDate);
-  const checkOut = new Date(formData.checkOutDate);
-  if (checkOut <= checkIn) {
-    return "Check-out date must be after check-in date.";
-  }
-  return "";
-};
+  const getDateError = () => {
+    if (!formData.checkInDate || !formData.checkOutDate) return "";
+    const checkIn = new Date(formData.checkInDate);
+    const checkOut = new Date(formData.checkOutDate);
+    if (checkOut <= checkIn) {
+      return "Check-out date must be after check-in date.";
+    }
+    return "";
+  };
 
-const dateError = getDateError();
-
+  const dateError = getDateError();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-     if (dateError) {
-    setError(dateError);
-    return;
-  }
+    if (dateError) {
+      setError(dateError);
+      return;
+    }
 
-   
     setSubmitting(true);
 
     try {
@@ -127,6 +141,14 @@ const dateError = getDateError();
       setSubmitting(false);
     }
   };
+  const today = new Date();
+
+  const minDate =
+    today.getFullYear() +
+    "-" +
+    String(today.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(today.getDate()).padStart(2, "0");
 
   if (bookingResult) {
     return (
@@ -192,13 +214,21 @@ const dateError = getDateError();
           <div className="form-row">
             <div className="form-group">
               <label>Phone</label>
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
+              <div className="phone-input">
+                <span className="country-code">+92</span>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="3001234567"
+                  maxLength="10"
+                  pattern="3[0-9]{9}"
+                  inputMode="numeric"
+                  required
+                />
+              </div>
             </div>
             <div className="form-group">
               <label>City</label>
@@ -286,6 +316,7 @@ const dateError = getDateError();
                 name="checkInDate"
                 value={formData.checkInDate}
                 onChange={handleChange}
+                min={minDate}
                 required
               />
             </div>
@@ -334,7 +365,11 @@ const dateError = getDateError();
             </div>
           </div>
 
-          <button type="submit" className="submit-btn" disabled={dateError !== ""}>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={dateError !== ""}
+          >
             Submit Booking
           </button>
         </form>

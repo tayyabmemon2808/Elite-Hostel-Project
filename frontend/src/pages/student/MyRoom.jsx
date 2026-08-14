@@ -5,7 +5,7 @@ import Loader from "../../components/Loader/Loader";
 
 function MyRoom() {
   const user = getUser();
- const userId = user._id || user.id;
+  const userId = user._id || user.id;
 
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,8 @@ function MyRoom() {
       <div className="empty-state">
         <p>You haven't been allotted a room yet.</p>
         <p className="empty-state-sub">
-          Please contact your hostel administration once your booking is approved.
+          Please contact your hostel administration once your booking is
+          approved.
         </p>
       </div>
     );
@@ -50,10 +51,14 @@ function MyRoom() {
 
       <div className="roommates-section">
         <h4>Roommates</h4>
-        {room.students && room.students.length > 1 ? (
+
+        {room.studentsAllotted &&
+        room.studentsAllotted.filter(
+          (s) => s._id.toString() !== userId.toString(),
+        ).length > 0 ? (
           <ul className="roommates-list">
-            {room.students
-              .filter((s) => s._id !== userId)
+            {room.studentsAllotted
+              .filter((s) => s._id.toString() !== userId.toString())
               .map((s) => (
                 <li key={s._id}>
                   {s.name} — {s.email}
