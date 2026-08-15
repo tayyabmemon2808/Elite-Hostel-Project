@@ -44,30 +44,7 @@ const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
 const userId = user._id || user.id;
 
-const handlePhotoUpload = async () => {
-  if (!photoFile) {
-    setError("Please select a photo first.");
-    return;
-  }
-  setLoading(true);
-  setError("");
-  const photoData = new FormData();
-  photoData.append("profileImage", photoFile);
-  try {
-    const res = await api.put(`/auth/upload-photo/${userId}`, photoData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    const updatedUser = { ...user, profileImage: res.data.user.profileImage };
-    setUser(updatedUser);
-    setPhotoFile(null);
-    setError("");
-    window.location.reload();
-  } catch (err) {
-    setError(err.response?.data?.message || "Failed to upload photo.");
-  } finally {
-    setLoading(false);
-  }
-};
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

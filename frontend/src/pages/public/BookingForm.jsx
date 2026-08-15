@@ -58,24 +58,24 @@ function BookingForm() {
   };
 
   const handleChange = (e) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
 
-  if (name === "phone") {
-    const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+    if (name === "phone") {
+      const digitsOnly = value.replace(/\D/g, "").slice(0, 10);
+
+      setFormData({
+        ...formData,
+        phone: digitsOnly,
+      });
+
+      return;
+    }
 
     setFormData({
       ...formData,
-      phone: digitsOnly,
+      [name]: value,
     });
-
-    return;
-  }
-
-  setFormData({
-    ...formData,
-    [name]: value,
-  });
-};
+  };
 
   const calculateEstimatedPrice = () => {
     if (!selectedHostel || !formData.checkInDate || !formData.checkOutDate) {
@@ -131,7 +131,11 @@ function BookingForm() {
     setSubmitting(true);
 
     try {
-      const res = await api.post("/bookings/create", formData);
+      const dataToSend = {
+        ...formData,
+        phone: `+92${formData.phone}`,
+      };
+      const res = await api.post("/bookings/create", dataToSend);
       setBookingResult(res.data);
     } catch (err) {
       setError(
